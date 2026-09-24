@@ -22,7 +22,7 @@ function delay(ms) {
 
 function focusPage(name) {
   if (name === "home") {
-    home.querySelector('[data-page="home"]').focus({ preventScroll: true });
+    home.querySelector("h1").focus({ preventScroll: true });
   } else {
     pages.get(name).querySelector("h2").focus({ preventScroll: true });
   }
@@ -40,14 +40,7 @@ async function navigate(name, updateHistory = true) {
     pendingNavigation = { name, updateHistory };
     return;
   }
-  if (name === current) {
-    if (name === "home") {
-      const button = home.querySelector('[data-page="home"]');
-      button.classList.add("is-selected");
-      window.setTimeout(() => button.classList.remove("is-selected"), 190);
-    }
-    return;
-  }
+  if (name === current) return;
 
   transitioning = true;
   if (updateHistory) {

@@ -10,12 +10,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <script src="site.js?v=2" defer></script>
+  <link rel="stylesheet" href="styles.css?v=3">
+  <script src="site.js?v=3" defer></script>
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-    <symbol id="i-home" viewBox="0 0 32 32"><path d="m4 14 12-10 12 10v14H4V14Z"/><path d="M12 28V18h8v10"/></symbol>
     <symbol id="i-skills" viewBox="0 0 32 32"><circle cx="16" cy="9" r="5"/><path d="M5 28v-3a11 11 0 0 1 22 0v3H5Z"/></symbol>
     <symbol id="i-gallery" viewBox="0 0 32 32"><rect x="3" y="5" width="26" height="22" rx="2"/><circle cx="11" cy="12" r="2"/><path d="m4 24 8-8 5 5 4-4 7 7"/></symbol>
     <symbol id="i-internship" viewBox="0 0 32 32"><rect x="3" y="10" width="26" height="18" rx="2"/><path d="M11 10V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4M3 18h26M14 17v3h4v-3"/></symbol>
@@ -24,8 +23,6 @@
     <symbol id="i-experience" viewBox="0 0 32 32"><path d="M7 3h14l5 5v21H7V3Z"/><path d="M21 3v6h5M11 15h11M11 20h11M11 25h8"/></symbol>
     <symbol id="i-achievements" viewBox="0 0 32 32"><path d="M9 4h14v9a7 7 0 0 1-14 0V4ZM9 7H4v5a5 5 0 0 0 5 5m14-10h5v5a5 5 0 0 1-5 5M16 20v5m-6 3h12m-10-3h8"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 32 32"><path d="m19 7-9 9 9 9M10 16h18"/></symbol>
-    <symbol id="i-github" viewBox="0 0 32 32"><path d="M12 27c-6 2-6-3-9-4m23 5v-5a5 5 0 0 0-1.5-4c5-.6 7.5-2.5 7.5-8a8 8 0 0 0-2-5.5 8 8 0 0 0-.2-5.5s-3 0-5.5 2.5a19 19 0 0 0-9 0C12.8 0 9.8 0 9.8 0a8 8 0 0 0-.2 5.5A8 8 0 0 0 7.5 11c0 5.5 2.5 7.4 7.5 8a5 5 0 0 0-1.5 4v5"/></symbol>
-    <symbol id="i-linkedin" viewBox="0 0 32 32"><rect x="3" y="3" width="26" height="26" rx="3"/><path d="M9 13v11m0-16v1m6 15V13m0 5a5 5 0 0 1 10 0v6"/></symbol>
   </svg>
 
   <a class="skip-link" href="#main">Skip to content</a>
@@ -38,24 +35,21 @@
       <section class="home-view" data-view="home" aria-label="Home">
         <div class="orbit-stage">
           <svg class="orbit-track" viewBox="0 0 1000 720" preserveAspectRatio="none" aria-hidden="true">
-            <ellipse cx="500" cy="360" rx="410" ry="300" />
-            <circle cx="657" cy="83" r="4"/><circle cx="879" cy="245" r="4"/>
-            <circle cx="879" cy="475" r="4"/><circle cx="657" cy="637" r="4"/>
-            <circle cx="343" cy="637" r="4"/><circle cx="121" cy="475" r="4"/>
-            <circle cx="121" cy="245" r="4"/><circle cx="343" cy="83" r="4"/>
+            <ellipse cx="500" cy="360" rx="400" ry="300" />
+            <circle cx="657" cy="83" r="3"/><circle cx="883" cy="475" r="3"/>
+            <circle cx="343" cy="637" r="3"/><circle cx="117" cy="245" r="3"/>
           </svg>
 
           <div class="centerpiece">
             <div class="character-wrap"><img class="character" src="assets/character.png" width="1254" height="1254" alt="Original cream-colored cartoon character with a dark patch and a gentle smile"><span class="character-shadow" aria-hidden="true"></span></div>
             <div class="intro">
-              <h1>Hi, I’m XXX</h1>
+              <h1 tabindex="-1">Hi, I’m XXX</h1>
               <span class="intro-swish" aria-hidden="true"></span>
               <p>Student<br>AI Full-Stack / Agent Developer<br>Animation Enthusiast</p>
             </div>
           </div>
 
           <nav class="orbit-nav" aria-label="Portfolio sections">
-            <button class="orbit-button" type="button" data-page="home" aria-current="page"><svg class="nav-icon" aria-hidden="true"><use href="#i-home"/></svg><span>Home</span></button>
             <button class="orbit-button" type="button" data-page="skills"><svg class="nav-icon" aria-hidden="true"><use href="#i-skills"/></svg><span>Skills</span></button>
             <button class="orbit-button" type="button" data-page="gallery"><svg class="nav-icon" aria-hidden="true"><use href="#i-gallery"/></svg><span>Gallery</span></button>
             <button class="orbit-button" type="button" data-page="internship"><svg class="nav-icon" aria-hidden="true"><use href="#i-internship"/></svg><span>Internship</span></button>
@@ -76,7 +70,7 @@
       </section>
 
       <section class="content-view" data-view="internship" aria-labelledby="internship-title" hidden>
-        <div class="content-shell"><button class="back-button" type="button" data-go-home><svg aria-hidden="true"><use href="#i-arrow"/></svg>Back to Home</button><div class="page-heading"><span class="page-index">03 / 07</span><h2 id="internship-title" tabindex="-1">Internship<span class="heading-dot">.</span></h2><p>Git Faced</p></div><div class="feature-line"><span class="feature-marker" aria-hidden="true"></span><div><h3>Internship details</h3><p>Git Faced is the scenario company for this page. Add your role, dates, responsibilities, and work here.</p></div></div></div>
+        <div class="content-shell"><button class="back-button" type="button" data-go-home><svg aria-hidden="true"><use href="#i-arrow"/></svg>Back to Home</button><div class="page-heading"><span class="page-index">03 / 07</span><h2 id="internship-title" tabindex="-1">Internship<span class="heading-dot">.</span></h2><p>Git Faced</p></div><div class="feature-line"><span class="feature-marker" aria-hidden="true"></span><div><h3>Internship details</h3><p>Role, dates, and selected work will be added here.</p></div></div></div>
       </section>
 
       <section class="content-view" data-view="contact" aria-labelledby="contact-title" hidden>
@@ -96,7 +90,7 @@
       </section>
     </main>
 
-    <footer class="site-footer"><span>© 2026 XXX</span><div class="social-placeholder" aria-label="Social links to be added"><span>Links coming soon</span><svg aria-hidden="true"><use href="#i-linkedin"/></svg><svg aria-hidden="true"><use href="#i-github"/></svg><svg aria-hidden="true"><use href="#i-contact"/></svg></div></footer>
+    <footer class="site-footer"><span>© 2026 XXX</span><span>Social links to be added</span></footer>
   </div>
 </body>
 </html>
