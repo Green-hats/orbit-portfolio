@@ -5,6 +5,7 @@ const navButtons = [...document.querySelectorAll(".orbit-button")];
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 let current = "home";
 let transitioning = false;
+let pendingNavigation = null;
 
 function pageFromUrl() {
   const name = window.location.hash.slice(1).toLowerCase();
@@ -34,7 +35,11 @@ function showInitial(name) {
 }
 
 async function navigate(name, updateHistory = true) {
-  if (!pages.has(name) || transitioning) return;
+  if (!pages.has(name)) return;
+  if (transitioning) {
+    pendingNavigation = { name, updateHistory };
+    return;
+  }
   if (name === current) {
     if (name === "home") {
       const button = home.querySelector('[data-page="home"]');
@@ -79,6 +84,14 @@ async function navigate(name, updateHistory = true) {
   next.classList.remove("is-entering", "is-active");
   transitioning = false;
 
+  if (pendingNavigation) {
+    const pending = pendingNavigation;
+    pendingNavigation = null;
+    if (pending.name !== current) {
+      navigate(pending.name, pending.updateHistory);
+      return;
+    }
+  }
   const requested = pageFromUrl();
   if (requested !== current) navigate(requested, false);
 }
