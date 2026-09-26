@@ -7,14 +7,16 @@
   <meta name="description" content="A personal portfolio for Greenhats — student, AI full-stack and agent developer, and animation enthusiast.">
   <title>Greenhats · My Portfolio</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="alternate" hreflang="en" href="index.html">
+  <link rel="alternate" hreflang="zh-CN" href="zh.html">
   <link rel="preload" href="assets/character.png" as="image" fetchpriority="high">
   <link rel="preload" href="assets/fonts/poppins-600-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/orbit-wenkai-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/orbit-wenkai-medium.woff2" as="font" type="font/woff2" crossorigin>
-  <script>try{if(localStorage.getItem("greenhats-portfolio-language")==="zh")document.documentElement.classList.add("locale-pending")}catch(_){}</script>
-  <link rel="stylesheet" href="styles.css?v=70">
-  <script src="site.js?v=38" defer></script>
+  <script>try{const saved=localStorage.getItem("greenhats-theme");const mode=["auto","light","dark"].includes(saved)?saved:"auto";const dark=mode==="dark"||(mode==="auto"&&matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.dataset.theme=dark?"dark":"light";document.documentElement.dataset.themeMode=mode;if(sessionStorage.getItem("greenhats-language-transition")==="1"){document.documentElement.classList.add("locale-arriving");sessionStorage.removeItem("greenhats-language-transition")}}catch(_){document.documentElement.dataset.theme="light"}</script>
+  <link rel="stylesheet" href="styles.css?v=72">
+  <script src="site.js?v=40" defer></script>
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -26,15 +28,26 @@
     <symbol id="i-experience" viewBox="0 0 32 32"><path d="M7 3h14l5 5v21H7V3Z"/><path d="M21 3v6h5M11 15h11M11 20h11M11 25h8"/></symbol>
     <symbol id="i-achievements" viewBox="0 0 32 32"><path d="M9 4h14v9a7 7 0 0 1-14 0V4ZM9 7H4v5a5 5 0 0 0 5 5m14-10h5v5a5 5 0 0 1-5 5M16 20v5m-6 3h12m-10-3h8"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 32 32"><path d="m19 7-9 9 9 9M10 16h18"/></symbol>
+    <symbol id="i-theme-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4m0-14.2-1.4 1.4M6.3 17.7l-1.4 1.4"/></symbol>
+    <symbol id="i-theme-moon" viewBox="0 0 24 24"><path d="M20.2 15.6A8.5 8.5 0 0 1 8.4 3.8 8.5 8.5 0 1 0 20.2 15.6Z"/></symbol>
   </svg>
 
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="site-frame">
     <header class="site-header">
       <button class="brand" type="button" data-go-home aria-label="Greenhats — return home"><span class="brand-orbit" aria-hidden="true"><span class="brand-core"></span><span class="brand-satellite"></span></span><span class="brand-name">Greenhats<span class="brand-period">.</span></span></button>
-      <div class="language-switch" role="group" aria-label="Language / 语言">
-        <button type="button" data-language="en" aria-pressed="true" title="English">EN</button>
-        <button type="button" data-language="zh" aria-pressed="false" title="中文">中</button>
+      <nav class="language-switch" aria-label="Language / 语言">
+        <a href="index.html" data-language="en" lang="en" aria-current="page" title="English">EN</a>
+        <a href="zh.html" data-language="zh" lang="zh-CN" title="中文">中</a>
+      </nav>
+      <div class="theme-control">
+        <button class="theme-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="theme-menu" aria-label="Appearance: Auto" title="Appearance"><svg class="theme-glyph" aria-hidden="true"><use href="#i-theme-sun"/></svg><span class="theme-auto-mark" aria-hidden="true">A</span></button>
+        <div class="theme-menu" id="theme-menu" hidden>
+          <span class="theme-menu-title">Appearance</span>
+          <button type="button" data-theme-choice="auto" aria-pressed="true">Auto</button>
+          <button type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+          <button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+        </div>
       </div>
     </header>
 

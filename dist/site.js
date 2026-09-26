@@ -12,138 +12,62 @@ const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const stepAngle = 360 / sectionNames.length;
 const wheelThreshold = 280;
 const wheelResistance = .7;
-const languageKey = "greenhats-portfolio-language";
 const orbitHintKey = "greenhats-orbit-hint-seen";
+const themeKey = "greenhats-theme";
+const languageTransitionKey = "greenhats-language-transition";
+const currentLocale = document.documentElement.lang === "zh-CN" ? "zh" : "en";
 const sectionLabels = {
   experience: "经历", skills: "技能", gallery: "项目", achievements: "荣誉",
   travel: "旅行", internship: "求职", contact: "联系"
 };
-const shortEnglishLabels = { experience: "Exper.", achievements: "Achiev.", internship: "Intern." };
-const copyDefinitions = [
-  [".skip-link", "跳转到内容"],
-  [".intro-title-text", "你好，我是 Greenhats"],
-  [".intro-line:nth-child(1)", "学生"],
-  [".intro-line:nth-child(2)", "AI 全栈 / Agent 开发者"],
-  [".intro-line:nth-child(3)", "动画爱好者"],
-  [".back-button", "返回首页", "lastText"],
+const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+const themeControl = document.querySelector(".theme-control");
+const themeTrigger = themeControl.querySelector(".theme-trigger");
+const themeMenu = themeControl.querySelector(".theme-menu");
+const themeChoices = [...themeMenu.querySelectorAll("[data-theme-choice]")];
+let themeMode = ["auto", "light", "dark"].includes(document.documentElement.dataset.themeMode)
+  ? document.documentElement.dataset.themeMode : "auto";
+let themeAnimationTimer = 0;
 
-  ["[data-view='experience'] .page-heading h2", "经历", "firstText"],
-  ["[data-view='experience'] .timeline article:nth-child(1) .eyebrow", "开源贡献"],
-  ["[data-view='experience'] .timeline article:nth-child(1) h3", "LoopX 贡献者"],
-  ["[data-view='experience'] .timeline article:nth-child(1) p", "为长期运行的 AI Agent 控制平台补充编码回归测试及 Node 26 兼容性测试。"],
-  ["[data-view='experience'] .timeline article:nth-child(2) .timeline-date", "个人项目"],
-  ["[data-view='experience'] .timeline article:nth-child(2) .eyebrow", "应用开发"],
-  ["[data-view='experience'] .timeline article:nth-child(2) p", "开发 AI 营养应用与 RSS 自动化工具，涵盖 Go 后端、AI 服务与测试。"],
-  ["[data-view='experience'] .timeline article:nth-child(3) .eyebrow", "教育经历"],
-  ["[data-view='experience'] .timeline article:nth-child(3) h3", "软件工程"],
-  ["[data-view='experience'] .timeline article:nth-child(3) p", "河北科技大学本科在读，预计 2028 年 6 月毕业。"],
-
-  ["[data-view='skills'] .page-heading h2", "技能", "firstText"],
-  ["[data-view='skills'] .tech-stack-title", "技术栈"],
-  ["[data-view='skills'] .detail-row:nth-child(1) h3", "AI 与 Agent"],
-  ["[data-view='skills'] .detail-row:nth-child(1) p", "实践 Agent 循环、工具调用、RAG 与向量检索；在 <a href='https://github.com/Green-hats/NutriGo' target='_blank' rel='noopener noreferrer'>NutriGo<span class='external-mark' aria-hidden='true'>↗</span></a> 中结合 LiteLLM、BGE-small-zh 与 ChromaDB 构建五个营养工具。", "html"],
-  ["[data-view='skills'] .detail-row:nth-child(2) h3", "后端系统"],
-  ["[data-view='skills'] .detail-row:nth-child(2) p", "使用 Go 与 Python 开发 REST API、数据持久化、JWT 认证及服务集成。"],
-  ["[data-view='skills'] .detail-row:nth-child(3) h3", "自动化与交付"],
-  ["[data-view='skills'] .detail-row:nth-child(3) p", "在 <a href='https://github.com/Green-hats/AniGo' target='_blank' rel='noopener noreferrer'>AniGo<span class='external-mark' aria-hidden='true'>↗</span></a> 中实现 RSS 工作流、LLM 辅助解析与规则筛选；使用 Docker Compose、pytest 和 Go test。", "html"],
-  ["[data-view='skills'] .detail-row:nth-child(3) .tag-line span:last-child", "测试"],
-
-  ["[data-view='gallery'] .page-heading h2", "项目", "firstText"],
-  ["[data-view='gallery'] .project-tile:nth-child(1) .project-type", "AI 应用"],
-  ["[data-view='gallery'] .project-tile:nth-child(1) .project-copy p", "结合食物识别、营养分析及具备五个工具的 Agent，并接入 2,277 条知识的 RAG 数据库。"],
-  ["[data-view='gallery'] .project-tile:nth-child(1) .project-facts span:nth-child(1)", "5 个 Agent 工具"],
-  ["[data-view='gallery'] .project-tile:nth-child(1) .project-facts span:nth-child(2)", "2,277 条 RAG 知识"],
-  ["[data-view='gallery'] .project-tile:nth-child(2) .project-type", "自动化"],
-  ["[data-view='gallery'] .project-tile:nth-child(2) .project-copy p", "通过 LLM 解析 RSS 发布信息，再用规则选择版本并协调云端任务。"],
-  ["[data-view='gallery'] .project-tile:nth-child(2) .project-facts span:nth-child(2)", "LLM 解析"],
-  ["[data-view='gallery'] .project-tile:nth-child(2) .project-facts span:nth-child(3)", "规则筛选"],
-  ["[data-view='gallery'] .project-copy a", "查看项目 ", "firstText"],
-
-  ["[data-view='achievements'] .page-heading h2", "荣誉", "firstText"],
-  ["[data-view='achievements'] .award-list article:nth-child(1) .eyebrow", "编程竞赛"],
-  ["[data-view='achievements'] .award-list article:nth-child(1) h3", "蓝桥杯"],
-  ["[data-view='achievements'] .award-list article:nth-child(1) p", "全国软件和信息技术专业人才大赛 · 软件赛 Python 组"],
-  ["[data-view='achievements'] .award-list article:nth-child(1) strong", "全国总决赛<br>三等奖", "html"],
-  ["[data-view='achievements'] .award-list article:nth-child(2) .eyebrow", "数学建模"],
-  ["[data-view='achievements'] .award-list article:nth-child(2) p", "美国大学生数学建模竞赛 / 交叉学科建模竞赛"],
-  ["[data-view='achievements'] .award-list article:nth-child(2) strong", "S 奖"],
-
-  ["[data-view='travel'] .page-heading h2", "旅行", "firstText"],
-  ["[data-view='travel'] .travel-copy .eyebrow", "暂无记录"],
-  ["[data-view='travel'] .travel-copy h3", "后续更新。"],
-
-  ["[data-view='internship'] .page-heading h2", "求职", "firstText"],
-  ["[data-view='internship'] .internship-focus p", "我正在寻找以下方向的机会"],
-  ["[data-view='internship'] .internship-focus h3", "AI Agent <span>/</span><br>AI 全栈开发", "html"],
-  ["[data-view='internship'] .internship-focus>a", "联系我 ", "firstText"],
-
-  ["[data-view='contact'] .page-heading h2", "联系", "firstText"],
-  ["[data-view='contact'] .contact-primary .eyebrow", "邮箱"],
-  ["[data-view='contact'] .contact-secondary .eyebrow", "查看我的作品"],
-];
-Object.entries(sectionLabels).forEach(([page, label]) => {
-  copyDefinitions.push([`.orbit-button[data-page='${page}'] span, .reader-node[data-page='${page}'] .reader-button span`, label]);
-});
-function readCopy(node, mode) {
-  if (mode === "html") return node.innerHTML;
-  if (mode === "firstText") return node.firstChild.textContent;
-  if (mode === "lastText") return node.lastChild.textContent;
-  return node.textContent;
+function themeLabel(mode) {
+  const labels = currentLocale === "zh"
+    ? { auto: "跟随系统", light: "浅色", dark: "深色" }
+    : { auto: "Auto", light: "Light", dark: "Dark" };
+  return labels[mode];
 }
-function writeCopy(node, mode, value) {
-  if (mode === "html") node.innerHTML = value;
-  else if (mode === "firstText") node.firstChild.textContent = value;
-  else if (mode === "lastText") node.lastChild.textContent = value;
-  else node.textContent = value;
-}
-const copyTargets = copyDefinitions.map(([selector, zh, mode = "text"]) => {
-  const nodes = [...document.querySelectorAll(selector)];
-  return { nodes, en: nodes.map(node => readCopy(node, mode)), zh, mode };
-});
-function savedLanguage() {
-  try { return localStorage.getItem(languageKey) === "zh" ? "zh" : "en"; }
-  catch (_) { return "en"; }
-}
-let currentLocale = savedLanguage();
-function applyLocale(locale, remember = false) {
-  currentLocale = locale;
+
+function setTheme(mode, remember = false, animate = false) {
+  themeMode = ["auto", "light", "dark"].includes(mode) ? mode : "auto";
   if (remember) {
-    home.classList.add("has-told-intro");
-    try { localStorage.setItem(languageKey, locale); } catch (_) { /* Keep the choice for this visit. */ }
+    try { localStorage.setItem(themeKey, themeMode); } catch (_) { /* The chosen mode still works for this page. */ }
   }
-  copyTargets.forEach(({ nodes, en, zh, mode }) => nodes.forEach((node, index) => {
-    writeCopy(node, mode, locale === "zh" ? zh : en[index]);
-  }));
-  document.documentElement.lang = locale === "zh" ? "zh-CN" : "en";
-  document.querySelector("meta[name='description']").content = locale === "zh"
-    ? "Greenhats 的个人作品集：软件工程学生、AI 全栈与 Agent 开发者、动画爱好者。"
-    : "A personal portfolio for Greenhats — student, AI full-stack and agent developer, and animation enthusiast.";
-  document.querySelector(".brand").setAttribute("aria-label", locale === "zh" ? "Greenhats，返回首页" : "Greenhats — return home");
-  home.setAttribute("aria-label", locale === "zh" ? "首页" : "Home");
-  document.querySelector(".character").alt = locale === "zh" ? "原始奶油色卡通角色，带深色斑块与温和笑容" : "Original cream-colored cartoon character with a dark patch and a gentle smile";
-  document.querySelector(".project-art-nutri img").alt = locale === "zh" ? "NutriGo AI 聊天界面" : "NutriGo AI chat screen";
-  document.querySelector(".project-art-anigo img").alt = locale === "zh" ? "AniGo 订阅管理界面" : "AniGo subscription dashboard";
-  document.querySelectorAll(".orbit-nav,.reader-nav").forEach(nav => nav.setAttribute("aria-label", locale === "zh" ? "作品集章节" : "Portfolio sections"));
-  [...homeButtons, ...readerNodes.map(node => node.querySelector("button"))].forEach(button => {
-    const page = button.closest("[data-page]").dataset.page;
-    button.setAttribute("aria-label", locale === "zh" ? sectionLabels[page] : page[0].toUpperCase() + page.slice(1));
-  });
-  reader.querySelector(".reader-controls").setAttribute("aria-label", locale === "zh" ? "章节控制" : "Section controls");
-  reader.querySelector("[data-step='-1']").setAttribute("aria-label", locale === "zh" ? "上一章节" : "Previous section");
-  reader.querySelector("[data-step='1']").setAttribute("aria-label", locale === "zh" ? "下一章节" : "Next section");
-  document.querySelectorAll("[data-language]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.language === locale)));
-  document.querySelector("[data-language='en']").setAttribute("aria-label", "Switch to English");
-  document.querySelector("[data-language='zh']").setAttribute("aria-label", "切换到中文");
-  document.querySelectorAll(".portal-button[data-page]").forEach(button => {
-    button.querySelectorAll("span").forEach(label => {
-      label.textContent = locale === "zh" ? sectionLabels[button.dataset.page]
-        : label.classList.contains("nav-label-short") ? shortEnglishLabels[button.dataset.page]
-          : button.dataset.page[0].toUpperCase() + button.dataset.page.slice(1);
-    });
-  });
-  setTitle(current);
-  document.documentElement.classList.remove("locale-pending");
+  if (animate && !reducedMotion.matches) {
+    document.documentElement.classList.add("theme-changing");
+    void document.body.offsetHeight;
+    window.clearTimeout(themeAnimationTimer);
+    themeAnimationTimer = window.setTimeout(() => document.documentElement.classList.remove("theme-changing"), 480);
+  }
+  const dark = themeMode === "dark" || (themeMode === "auto" && systemDark.matches);
+  document.documentElement.dataset.theme = dark ? "dark" : "light";
+  document.documentElement.dataset.themeMode = themeMode;
+  document.querySelector('meta[name="theme-color"]').content = dark ? "#171b1e" : "#ffffff";
+  themeTrigger.querySelector("use").setAttribute("href", dark ? "#i-theme-moon" : "#i-theme-sun");
+  themeTrigger.setAttribute("aria-label", `${currentLocale === "zh" ? "外观" : "Appearance"}: ${themeLabel(themeMode)}`);
+  themeChoices.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.themeChoice === themeMode)));
 }
+
+function closeThemeMenu() {
+  themeMenu.hidden = true;
+  themeTrigger.setAttribute("aria-expanded", "false");
+}
+
+function updateLanguageLinks() {
+  const section = pageFromUrl();
+  const suffix = section === "home" ? "" : `#${section}`;
+  document.querySelector('[data-language="en"]').href = `index.html${suffix}`;
+  document.querySelector('[data-language="zh"]').href = `zh.html${suffix}`;
+}
+
 let current = "home";
 let orbitStep = 0;
 let transitioning = false;
@@ -378,6 +302,7 @@ async function navigate(name, updateHistory = true) {
   if (updateHistory) {
     const url = name === "home" ? window.location.pathname + window.location.search : `#${name}`;
     history.pushState({ page: name }, "", url);
+    updateLanguageLinks();
   }
   if (current === "home") await enterReader(name);
   else if (name === "home") await returnHome();
@@ -403,6 +328,7 @@ function showInitial(name) {
   if (name !== "home") setRingStep(sectionNames.indexOf(name));
   current = name;
   setTitle(name);
+  updateLanguageLinks();
 }
 
 readerNodes.forEach((node, index) => {
@@ -426,12 +352,34 @@ document.addEventListener("visibilitychange", () => {
   else if (current === "home") queueOrbitHint();
 });
 document.querySelectorAll("[data-go-home]").forEach(button => button.addEventListener("click", () => navigate("home")));
-document.querySelectorAll("[data-language]").forEach(button => button.addEventListener("click", () => {
-  if (button.dataset.language !== currentLocale) applyLocale(button.dataset.language, true);
+document.querySelectorAll("[data-language]").forEach(link => link.addEventListener("click", event => {
+  if (link.dataset.language === currentLocale) { event.preventDefault(); return; }
+  event.preventDefault();
+  updateLanguageLinks();
+  try { sessionStorage.setItem(languageTransitionKey, "1"); } catch (_) { /* Navigation still works. */ }
+  document.documentElement.classList.add("locale-leaving");
+  window.setTimeout(() => window.location.assign(link.href), reducedMotion.matches ? 0 : 210);
 }));
+themeTrigger.addEventListener("click", () => {
+  const open = themeMenu.hidden;
+  themeMenu.hidden = !open;
+  themeTrigger.setAttribute("aria-expanded", String(open));
+});
+themeChoices.forEach(button => button.addEventListener("click", () => {
+  setTheme(button.dataset.themeChoice, true, true);
+  closeThemeMenu();
+  themeTrigger.focus();
+}));
+document.addEventListener("pointerdown", event => {
+  if (!themeControl.contains(event.target)) closeThemeMenu();
+}, { passive: true });
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && !themeMenu.hidden) { event.stopImmediatePropagation(); closeThemeMenu(); themeTrigger.focus(); }
+});
+systemDark.addEventListener("change", () => { if (themeMode === "auto") setTheme("auto", false, true); });
 reader.querySelectorAll("[data-step]").forEach(button => button.addEventListener("click", () => stepSection(Number(button.dataset.step))));
-window.addEventListener("popstate", () => navigate(pageFromUrl(), false));
-window.addEventListener("hashchange", () => navigate(pageFromUrl(), false));
+window.addEventListener("popstate", () => { updateLanguageLinks(); navigate(pageFromUrl(), false); });
+window.addEventListener("hashchange", () => { updateLanguageLinks(); navigate(pageFromUrl(), false); });
 
 window.addEventListener("wheel", event => {
   if (reader.hidden) return;
@@ -473,6 +421,7 @@ document.addEventListener("keydown", event => {
   if (["ArrowUp", "PageUp"].includes(event.key)) { event.preventDefault(); stepSection(-1); }
 });
 
-applyLocale(currentLocale);
+setTheme(themeMode);
+if (document.documentElement.classList.contains("locale-arriving")) home.classList.add("has-told-intro");
 showInitial(pageFromUrl());
 if (current === "home") queueOrbitHint();

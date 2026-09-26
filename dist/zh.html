@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Greenhats 的个人作品集：软件工程学生、AI 全栈与 Agent 开发者、动画爱好者。">
+  <title>Greenhats · 我的作品集</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="alternate" hreflang="en" href="index.html">
+  <link rel="alternate" hreflang="zh-CN" href="zh.html">
+  <link rel="preload" href="assets/character.png" as="image" fetchpriority="high">
+  <link rel="preload" href="assets/fonts/poppins-600-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/orbit-wenkai-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/orbit-wenkai-medium.woff2" as="font" type="font/woff2" crossorigin>
+  <script>try{const saved=localStorage.getItem("greenhats-theme");const mode=["auto","light","dark"].includes(saved)?saved:"auto";const dark=mode==="dark"||(mode==="auto"&&matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.dataset.theme=dark?"dark":"light";document.documentElement.dataset.themeMode=mode;if(sessionStorage.getItem("greenhats-language-transition")==="1"){document.documentElement.classList.add("locale-arriving");sessionStorage.removeItem("greenhats-language-transition")}}catch(_){document.documentElement.dataset.theme="light"}</script>
+  <link rel="stylesheet" href="styles.css?v=72">
+  <script src="site.js?v=40" defer></script>
+</head>
+<body>
+  <svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-skills" viewbox="0 0 32 32"><circle cx="16" cy="9" r="5"></circle><path d="M5 28v-3a11 11 0 0 1 22 0v3H5Z"></path></symbol>
+    <symbol id="i-gallery" viewbox="0 0 32 32"><rect x="3" y="5" width="26" height="22" rx="2"></rect><circle cx="11" cy="12" r="2"></circle><path d="m4 24 8-8 5 5 4-4 7 7"></path></symbol>
+    <symbol id="i-internship" viewbox="0 0 32 32"><rect x="3" y="10" width="26" height="18" rx="2"></rect><path d="M11 10V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4M3 18h26M14 17v3h4v-3"></path></symbol>
+    <symbol id="i-contact" viewbox="0 0 32 32"><rect x="3" y="6" width="26" height="20" rx="2"></rect><path d="m4 8 12 10L28 8"></path></symbol>
+    <symbol id="i-travel" viewbox="0 0 32 32"><path d="M27 5 17 15 6 11l-3 3 9 6-4 5 2 2 5-4 6 6 3-3-4-11 9-6a3 3 0 0 0-2-4Z"></path></symbol>
+    <symbol id="i-experience" viewbox="0 0 32 32"><path d="M7 3h14l5 5v21H7V3Z"></path><path d="M21 3v6h5M11 15h11M11 20h11M11 25h8"></path></symbol>
+    <symbol id="i-achievements" viewbox="0 0 32 32"><path d="M9 4h14v9a7 7 0 0 1-14 0V4ZM9 7H4v5a5 5 0 0 0 5 5m14-10h5v5a5 5 0 0 1-5 5M16 20v5m-6 3h12m-10-3h8"></path></symbol>
+    <symbol id="i-arrow" viewbox="0 0 32 32"><path d="m19 7-9 9 9 9M10 16h18"></path></symbol>
+    <symbol id="i-theme-sun" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4m0-14.2-1.4 1.4M6.3 17.7l-1.4 1.4"></path></symbol>
+    <symbol id="i-theme-moon" viewbox="0 0 24 24"><path d="M20.2 15.6A8.5 8.5 0 0 1 8.4 3.8 8.5 8.5 0 1 0 20.2 15.6Z"></path></symbol>
+  </svg>
+
+  <a class="skip-link" href="#main">跳转到内容</a>
+  <div class="site-frame">
+    <header class="site-header">
+      <button class="brand" type="button" data-go-home aria-label="Greenhats，返回首页"><span class="brand-orbit" aria-hidden="true"><span class="brand-core"></span><span class="brand-satellite"></span></span><span class="brand-name">Greenhats<span class="brand-period">.</span></span></button>
+      <nav class="language-switch" aria-label="Language / 语言">
+        <a href="index.html" data-language="en" lang="en" title="English">EN</a>
+        <a href="zh.html" data-language="zh" lang="zh-CN" title="中文" aria-current="page">中</a>
+      </nav>
+      <div class="theme-control">
+        <button class="theme-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="theme-menu" aria-label="外观：跟随系统" title="外观"><svg class="theme-glyph" aria-hidden="true"><use href="#i-theme-sun"></use></svg><span class="theme-auto-mark" aria-hidden="true">A</span></button>
+        <div class="theme-menu" id="theme-menu" hidden>
+          <span class="theme-menu-title">外观</span>
+          <button type="button" data-theme-choice="auto" aria-pressed="true">跟随系统</button>
+          <button type="button" data-theme-choice="light" aria-pressed="false">浅色</button>
+          <button type="button" data-theme-choice="dark" aria-pressed="false">深色</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="home-view" data-view="home" aria-label="首页">
+        <div class="orbit-stage">
+          <div class="orbit-track" aria-hidden="true"></div>
+          <div class="orbit-sparks" aria-hidden="true"><div class="spark-orbit"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+
+          <div class="centerpiece">
+            <div class="character-wrap"><img class="character" src="assets/character.png" width="1254" height="1254" fetchpriority="high" alt="原始奶油色卡通角色，带深色斑块与温和笑容"><span class="character-shadow" aria-hidden="true"></span></div>
+            <div class="intro">
+              <h1 tabindex="-1"><span class="intro-title-wrap"><span class="intro-title-text">你好，我是 Greenhats</span><span class="intro-title-caret" aria-hidden="true"></span></span></h1>
+              <span class="intro-swish" aria-hidden="true"></span>
+              <p><span class="intro-line">学生</span><span class="intro-line">AI 全栈 / Agent 开发者</span><span class="intro-line">动画爱好者</span></p>
+            </div>
+          </div>
+
+          <nav class="orbit-nav" aria-label="作品集章节">
+            <button class="orbit-button" type="button" data-page="experience" aria-label="经历"><svg class="nav-icon" aria-hidden="true"><use href="#i-experience"></use></svg><span class="nav-label-full">经历</span><span class="nav-label-short" aria-hidden="true">经历</span></button>
+            <button class="orbit-button" type="button" data-page="skills" aria-label="技能"><svg class="nav-icon" aria-hidden="true"><use href="#i-skills"></use></svg><span>技能</span></button>
+            <button class="orbit-button" type="button" data-page="gallery" aria-label="项目"><svg class="nav-icon" aria-hidden="true"><use href="#i-gallery"></use></svg><span>项目</span></button>
+            <button class="orbit-button" type="button" data-page="achievements" aria-label="荣誉"><svg class="nav-icon" aria-hidden="true"><use href="#i-achievements"></use></svg><span class="nav-label-full">荣誉</span><span class="nav-label-short" aria-hidden="true">荣誉</span></button>
+            <button class="orbit-button" type="button" data-page="travel" aria-label="旅行"><svg class="nav-icon" aria-hidden="true"><use href="#i-travel"></use></svg><span>旅行</span></button>
+            <button class="orbit-button" type="button" data-page="internship" aria-label="求职"><svg class="nav-icon" aria-hidden="true"><use href="#i-internship"></use></svg><span class="nav-label-full">求职</span><span class="nav-label-short" aria-hidden="true">求职</span></button>
+            <button class="orbit-button" type="button" data-page="contact" aria-label="联系"><svg class="nav-icon" aria-hidden="true"><use href="#i-contact"></use></svg><span>联系</span></button>
+          </nav>
+        </div>
+      </section>
+
+      <div class="reader-view" data-reader hidden>
+        <div class="reader-orbit-viewport">
+          <div class="reader-orbit">
+            <div class="reader-disc" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <nav class="reader-nav" aria-label="作品集章节">
+              <div class="reader-node" data-page="experience"><button class="reader-button" type="button" aria-label="经历"><svg class="nav-icon" aria-hidden="true"><use href="#i-experience"></use></svg><span class="nav-label-full">经历</span><span class="nav-label-short" aria-hidden="true">经历</span></button></div>
+              <div class="reader-node" data-page="skills"><button class="reader-button" type="button" aria-label="技能"><svg class="nav-icon" aria-hidden="true"><use href="#i-skills"></use></svg><span>技能</span></button></div>
+              <div class="reader-node" data-page="gallery"><button class="reader-button" type="button" aria-label="项目"><svg class="nav-icon" aria-hidden="true"><use href="#i-gallery"></use></svg><span>项目</span></button></div>
+              <div class="reader-node" data-page="achievements"><button class="reader-button" type="button" aria-label="荣誉"><svg class="nav-icon" aria-hidden="true"><use href="#i-achievements"></use></svg><span class="nav-label-full">荣誉</span><span class="nav-label-short" aria-hidden="true">荣誉</span></button></div>
+              <div class="reader-node" data-page="travel"><button class="reader-button" type="button" aria-label="旅行"><svg class="nav-icon" aria-hidden="true"><use href="#i-travel"></use></svg><span>旅行</span></button></div>
+              <div class="reader-node" data-page="internship"><button class="reader-button" type="button" aria-label="求职"><svg class="nav-icon" aria-hidden="true"><use href="#i-internship"></use></svg><span class="nav-label-full">求职</span><span class="nav-label-short" aria-hidden="true">求职</span></button></div>
+              <div class="reader-node" data-page="contact"><button class="reader-button" type="button" aria-label="联系"><svg class="nav-icon" aria-hidden="true"><use href="#i-contact"></use></svg><span>联系</span></button></div>
+            </nav>
+          </div>
+        </div>
+        <div class="reader-dial-index" aria-hidden="true"><strong>01</strong></div>
+        <div class="reader-content">
+      <section class="content-view" data-view="experience" aria-labelledby="experience-title" hidden>
+        <div class="content-shell">
+          <button class="back-button" type="button" data-go-home><span class="back-icon" aria-hidden="true"><svg><use href="#i-arrow"></use></svg></span>返回首页</button>
+          <div class="page-heading"><h2 id="experience-title" tabindex="-1">经历<span class="heading-dot">.</span></h2></div>
+          <div class="timeline"><article><span class="timeline-date">2026.09</span><div><span class="eyebrow">开源贡献</span><h3>LoopX 贡献者</h3><p>为长期运行的 AI Agent 控制平台补充编码回归测试及 Node 26 兼容性测试。</p><div class="inline-links"><a href="https://github.com/huangruiteng/loopx/pull/4158" target="_blank" rel="noopener noreferrer">PR #4158 ↗</a><a href="https://github.com/huangruiteng/loopx/pull/4168" target="_blank" rel="noopener noreferrer">PR #4168 ↗</a></div></div></article><article><span class="timeline-date">个人项目</span><div><span class="eyebrow">应用开发</span><h3>NutriGo &amp; AniGo</h3><p>开发 AI 营养应用与 RSS 自动化工具，涵盖 Go 后端、AI 服务与测试。</p><div class="inline-links"><a href="https://github.com/Green-hats/NutriGo" target="_blank" rel="noopener noreferrer">NutriGo ↗</a><a href="https://github.com/Green-hats/AniGo" target="_blank" rel="noopener noreferrer">AniGo ↗</a></div></div></article><article><span class="timeline-date">2024 — 2028</span><div><span class="eyebrow">教育经历</span><h3>软件工程</h3><p>河北科技大学本科在读，预计 2028 年 6 月毕业。</p></div></article></div>
+        </div>
+      </section>
+
+      <section class="content-view" data-view="skills" aria-labelledby="skills-title" hidden>
+        <div class="content-shell">
+          <button class="back-button" type="button" data-go-home><span class="back-icon" aria-hidden="true"><svg><use href="#i-arrow"></use></svg></span>返回首页</button>
+          <div class="page-heading"><h2 id="skills-title" tabindex="-1">技能<span class="heading-dot">.</span></h2></div>
+          <div class="skill-list">
+            <article class="detail-row"><span class="row-number">01</span><div><h3>AI 与 Agent</h3><p>实践 Agent 循环、工具调用、RAG 与向量检索；在 <a href="https://github.com/Green-hats/NutriGo" target="_blank" rel="noopener noreferrer">NutriGo<span class="external-mark" aria-hidden="true">↗</span></a> 中结合 LiteLLM、BGE-small-zh 与 ChromaDB 构建五个营养工具。</p><div class="tag-line"><span>Python</span><span>FastAPI</span><span>LiteLLM</span><span>ChromaDB</span></div></div></article>
+            <article class="detail-row"><span class="row-number">02</span><div><h3>后端系统</h3><p>使用 Go 与 Python 开发 REST API、数据持久化、JWT 认证及服务集成。</p><div class="tag-line"><span>Go</span><span>Gin</span><span>GORM</span><span>SQLite</span></div></div></article>
+            <article class="detail-row"><span class="row-number">03</span><div><h3>自动化与交付</h3><p>在 <a href="https://github.com/Green-hats/AniGo" target="_blank" rel="noopener noreferrer">AniGo<span class="external-mark" aria-hidden="true">↗</span></a> 中实现 RSS 工作流、LLM 辅助解析与规则筛选；使用 Docker Compose、pytest 和 Go test。</p><div class="tag-line"><span>RSS</span><span>Docker Compose</span><span>测试</span></div></div></article>
+          </div>
+          <h3 class="tech-stack-title" id="tech-stack-title">技术栈</h3>
+          <div class="tech-atlas" aria-labelledby="tech-stack-title">
+            <span class="tech-mark"><img src="assets/tech/go.svg" alt="" loading="lazy" width="60" height="60"><strong>Go</strong></span>
+            <span class="tech-mark"><img src="assets/tech/python.svg" alt="" loading="lazy" width="60" height="60"><strong>Python</strong></span>
+            <span class="tech-mark"><img src="assets/tech/react.svg" alt="" loading="lazy" width="60" height="60"><strong>React</strong></span>
+            <span class="tech-mark"><img src="assets/tech/typescript.svg" alt="" loading="lazy" width="60" height="60"><strong>TypeScript</strong></span>
+            <span class="tech-mark"><img src="assets/tech/fastapi.svg" alt="" loading="lazy" width="60" height="60"><strong>FastAPI</strong></span>
+            <span class="tech-mark"><img src="assets/tech/docker.svg" alt="" loading="lazy" width="60" height="60"><strong>Docker</strong></span>
+            <span class="tech-mark"><img src="assets/tech/sqlite.svg" alt="" loading="lazy" width="60" height="60"><strong>SQLite</strong></span>
+            <span class="tech-mark"><img src="assets/tech/cplusplus.svg" alt="" loading="lazy" width="60" height="60"><strong>C++</strong></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-view" data-view="gallery" aria-labelledby="gallery-title" hidden>
+        <div class="content-shell">
+          <button class="back-button" type="button" data-go-home><span class="back-icon" aria-hidden="true"><svg><use href="#i-arrow"></use></svg></span>返回首页</button>
+          <div class="page-heading"><h2 id="gallery-title" tabindex="-1">项目<span class="heading-dot">.</span></h2></div>
+          <div class="project-grid">
+            <article class="project-tile"><div class="project-art project-art-nutri"><img src="assets/nutrigo-chat.jpg" alt="NutriGo AI 聊天界面" width="390" height="844" decoding="async"></div><div class="project-copy"><span class="project-type">AI 应用</span><h3>NutriGo</h3><p>结合食物识别、营养分析及具备五个工具的 Agent，并接入 2,277 条知识的 RAG 数据库。</p><div class="project-facts"><span>5 个 Agent 工具</span><span>2,277 条 RAG 知识</span></div><a href="https://github.com/Green-hats/NutriGo" target="_blank" rel="noopener noreferrer">查看项目 <span aria-hidden="true">↗</span></a></div></article>
+            <article class="project-tile"><div class="project-art project-art-anigo"><img src="assets/anigo-home.png" alt="AniGo 订阅管理界面" width="4320" height="2700" decoding="async"></div><div class="project-copy"><span class="project-type">自动化</span><h3>AniGo</h3><p>通过 LLM 解析 RSS 发布信息，再用规则选择版本并协调云端任务。</p><div class="project-facts"><span>RSS</span><span>LLM 解析</span><span>规则筛选</span></div><a href="https://github.com/Green-hats/AniGo" target="_blank" rel="noopener noreferrer">查看项目 <span aria-hidden="true">↗</span></a></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-view" data-view="achievements" aria-labelledby="achievements-title" hidden>
+        <div class="content-shell">
+          <button class="back-button" type="button" data-go-home><span class="back-icon" aria-hidden="true"><svg><use href="#i-arrow"></use></svg></span>返回首页</button>
+          <div class="page-heading"><h2 id="achievements-title" tabindex="-1">荣誉<span class="heading-dot">.</span></h2></div>
+          <div class="award-list"><article><span class="award-number">01</span><div><span class="eyebrow">编程竞赛</span><h3>蓝桥杯</h3><p>全国软件和信息技术专业人才大赛 · 软件赛 Python 组</p></div><strong>全国总决赛<br>三等奖</strong></article><article><span class="award-number">02</span><div><span class="eyebrow">数学建模</span><h3>MCM / ICM</h3><p>美国大学生数学建模竞赛 / 交叉学科建模竞赛</p></div><strong>S 奖</strong></article></div>
+        </div>
+      </section>
+
+      <section class="content-view" data-view="travel" aria-labelledby="travel-title" hidden>
+        <div class="content-shell">
+          <button class="back-button" type="button" data-go-home><span class="back-icon" aria-hidden="true"><svg><use href="#i-arrow"></use></svg></span>返回首页</button>
+          <div class="page-heading"><h2 id="travel-title" tabindex="-1">旅行<span class="heading-dot">.</span></h2></div>
+          <div class="travel-empty"><div class="travel-visual" aria-hidden="true"><span class="travel-path"></span><span class="travel-line"></span><svg><use href="#i-travel"></use></svg></div><div class="travel-copy"><span class="eyebrow">暂无记录</span><h3>后续更新。</h3></div></div>
+        </div>
+      </section>
+
+      <section class="content-view" data-view="internship" aria-labelledby="internship-title" hidden>
+        <div class="content-shell">
+          <button class="back-button" type="button" data-go-home><span class="back-icon" aria-hidden="true"><svg><use href="#i-arrow"></use></svg></span>返回首页</button>
+          <div class="page-heading"><h2 id="internship-title" tabindex="-1">求职<span class="heading-dot">.</span></h2></div>
+          <div class="internship-focus"><p>我正在寻找以下方向的机会</p><h3>AI Agent <span>/</span><br>AI 全栈开发</h3><a href="mailto:greenhats666@gmail.com">联系我 <span aria-hidden="true">↗</span></a></div>
+        </div>
+      </section>
+
+      <section class="content-view" data-view="contact" aria-labelledby="contact-title" hidden>
+        <div class="content-shell">
+          <button class="back-button" type="button" data-go-home><span class="back-icon" aria-hidden="true"><svg><use href="#i-arrow"></use></svg></span>返回首页</button>
+          <div class="page-heading"><h2 id="contact-title" tabindex="-1">联系<span class="heading-dot">.</span></h2></div>
+          <address class="contact-display"><div class="contact-primary"><span class="eyebrow">邮箱</span><a href="mailto:greenhats666@gmail.com">greenhats666@gmail.com <span aria-hidden="true">↗</span></a></div><div class="contact-secondary"><span class="eyebrow">查看我的作品</span><a href="https://github.com/Green-hats" target="_blank" rel="noopener noreferrer">GitHub / Green-hats <span aria-hidden="true">↗</span></a></div></address>
+        </div>
+      </section>
+        </div>
+        <div class="reader-controls" aria-label="章节控制"><button type="button" data-step="-1" aria-label="上一章节">↑</button><span class="reader-count" aria-live="polite">01 / 07</span><button type="button" data-step="1" aria-label="下一章节">↓</button></div>
+      </div>
+    </main>
+
+  </div>
+</body>
+</html>
