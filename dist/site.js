@@ -37,6 +37,7 @@ const copyDefinitions = [
   ["[data-view='experience'] .timeline article:nth-child(3) p", "河北科技大学本科在读，预计 2028 年 6 月毕业。"],
 
   ["[data-view='skills'] .page-heading h2", "技能", "firstText"],
+  ["[data-view='skills'] .tech-stack-title", "技术栈"],
   ["[data-view='skills'] .detail-row:nth-child(1) h3", "AI 与 Agent"],
   ["[data-view='skills'] .detail-row:nth-child(1) p", "实践 Agent 循环、工具调用、RAG 与向量检索；在 <a href='https://github.com/Green-hats/NutriGo' target='_blank' rel='noopener noreferrer'>NutriGo<span class='external-mark' aria-hidden='true'>↗</span></a> 中结合 LiteLLM、BGE-small-zh 与 ChromaDB 构建五个营养工具。", "html"],
   ["[data-view='skills'] .detail-row:nth-child(2) h3", "后端系统"],
