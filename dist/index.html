@@ -3,15 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#fffdf9">
-  <meta name="description" content="A personal portfolio for XXX — student, AI full-stack and agent developer, and animation enthusiast.">
-  <title>XXX · My Portfolio</title>
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="A personal portfolio for Greenhats — student, AI full-stack and agent developer, and animation enthusiast.">
+  <title>Greenhats · My Portfolio</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=9">
-  <script src="site.js?v=9" defer></script>
+  <link rel="preload" href="assets/character.png" as="image" fetchpriority="high">
+  <link rel="preload" href="assets/fonts/poppins-600-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/orbit-wenkai-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/orbit-wenkai-medium.woff2" as="font" type="font/woff2" crossorigin>
+  <script>try{if(localStorage.getItem("greenhats-portfolio-language")==="zh")document.documentElement.classList.add("locale-pending")}catch(_){}</script>
+  <link rel="stylesheet" href="styles.css?v=64">
+  <script src="site.js?v=34" defer></script>
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -28,66 +31,124 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="site-frame">
     <header class="site-header">
-      <button class="brand" type="button" data-go-home aria-label="My Portfolio — return home"><span class="brand-stroke" aria-hidden="true"></span><span>My Portfolio</span></button>
+      <button class="brand" type="button" data-go-home aria-label="Greenhats — return home"><span class="brand-orbit" aria-hidden="true"><span class="brand-core"></span><span class="brand-satellite"></span></span><span class="brand-name">Greenhats<span class="brand-period">.</span></span></button>
+      <div class="language-switch" role="group" aria-label="Language / 语言">
+        <button type="button" data-language="en" aria-pressed="true" title="English">EN</button>
+        <button type="button" data-language="zh" aria-pressed="false" title="中文">中</button>
+      </div>
     </header>
 
     <main id="main">
       <section class="home-view" data-view="home" aria-label="Home">
         <div class="orbit-stage">
           <div class="orbit-track" aria-hidden="true"></div>
-          <div class="orbit-sparks" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="orbit-sparks" aria-hidden="true"><div class="spark-orbit"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
 
           <div class="centerpiece">
-            <div class="character-wrap"><img class="character" src="assets/character.png" width="1254" height="1254" alt="Original cream-colored cartoon character with a dark patch and a gentle smile"><span class="character-shadow" aria-hidden="true"></span></div>
+            <div class="character-wrap"><img class="character" src="assets/character.png" width="1254" height="1254" fetchpriority="high" alt="Original cream-colored cartoon character with a dark patch and a gentle smile"><span class="character-shadow" aria-hidden="true"></span></div>
             <div class="intro">
-              <h1 tabindex="-1">Hi, I’m XXX</h1>
+              <h1 tabindex="-1"><span class="intro-title-wrap"><span class="intro-title-text">Hi, I’m Greenhats</span><span class="intro-title-caret" aria-hidden="true"></span></span></h1>
               <span class="intro-swish" aria-hidden="true"></span>
-              <p>Student<br>AI Full-Stack / Agent Developer<br>Animation Enthusiast</p>
+              <p><span class="intro-line">Student</span><span class="intro-line">AI Full-Stack / Agent Developer</span><span class="intro-line">Animation Enthusiast</span></p>
             </div>
           </div>
 
           <nav class="orbit-nav" aria-label="Portfolio sections">
+            <button class="orbit-button" type="button" data-page="experience" aria-label="Experience"><svg class="nav-icon" aria-hidden="true"><use href="#i-experience"/></svg><span class="nav-label-full">Experience</span><span class="nav-label-short" aria-hidden="true">Exper.</span></button>
             <button class="orbit-button" type="button" data-page="skills"><svg class="nav-icon" aria-hidden="true"><use href="#i-skills"/></svg><span>Skills</span></button>
             <button class="orbit-button" type="button" data-page="gallery"><svg class="nav-icon" aria-hidden="true"><use href="#i-gallery"/></svg><span>Gallery</span></button>
-            <button class="orbit-button" type="button" data-page="internship"><svg class="nav-icon" aria-hidden="true"><use href="#i-internship"/></svg><span>Internship</span></button>
-            <button class="orbit-button" type="button" data-page="contact"><svg class="nav-icon" aria-hidden="true"><use href="#i-contact"/></svg><span>Contact</span></button>
+            <button class="orbit-button" type="button" data-page="achievements" aria-label="Achievements"><svg class="nav-icon" aria-hidden="true"><use href="#i-achievements"/></svg><span class="nav-label-full">Achievements</span><span class="nav-label-short" aria-hidden="true">Achiev.</span></button>
             <button class="orbit-button" type="button" data-page="travel"><svg class="nav-icon" aria-hidden="true"><use href="#i-travel"/></svg><span>Travel</span></button>
-            <button class="orbit-button" type="button" data-page="experience"><svg class="nav-icon" aria-hidden="true"><use href="#i-experience"/></svg><span>Experience</span></button>
-            <button class="orbit-button" type="button" data-page="achievements"><svg class="nav-icon" aria-hidden="true"><use href="#i-achievements"/></svg><span>Achievements</span></button>
+            <button class="orbit-button" type="button" data-page="internship" aria-label="Internship"><svg class="nav-icon" aria-hidden="true"><use href="#i-internship"/></svg><span class="nav-label-full">Internship</span><span class="nav-label-short" aria-hidden="true">Intern.</span></button>
+            <button class="orbit-button" type="button" data-page="contact"><svg class="nav-icon" aria-hidden="true"><use href="#i-contact"/></svg><span>Contact</span></button>
           </nav>
         </div>
       </section>
 
+      <div class="reader-view" data-reader hidden>
+        <div class="reader-orbit-viewport">
+          <div class="reader-orbit">
+            <div class="reader-disc" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <nav class="reader-nav" aria-label="Portfolio sections">
+              <div class="reader-node" data-page="experience"><button class="reader-button" type="button" aria-label="Experience"><svg class="nav-icon" aria-hidden="true"><use href="#i-experience"/></svg><span class="nav-label-full">Experience</span><span class="nav-label-short" aria-hidden="true">Exper.</span></button></div>
+              <div class="reader-node" data-page="skills"><button class="reader-button" type="button" aria-label="Skills"><svg class="nav-icon" aria-hidden="true"><use href="#i-skills"/></svg><span>Skills</span></button></div>
+              <div class="reader-node" data-page="gallery"><button class="reader-button" type="button" aria-label="Gallery"><svg class="nav-icon" aria-hidden="true"><use href="#i-gallery"/></svg><span>Gallery</span></button></div>
+              <div class="reader-node" data-page="achievements"><button class="reader-button" type="button" aria-label="Achievements"><svg class="nav-icon" aria-hidden="true"><use href="#i-achievements"/></svg><span class="nav-label-full">Achievements</span><span class="nav-label-short" aria-hidden="true">Achiev.</span></button></div>
+              <div class="reader-node" data-page="travel"><button class="reader-button" type="button" aria-label="Travel"><svg class="nav-icon" aria-hidden="true"><use href="#i-travel"/></svg><span>Travel</span></button></div>
+              <div class="reader-node" data-page="internship"><button class="reader-button" type="button" aria-label="Internship"><svg class="nav-icon" aria-hidden="true"><use href="#i-internship"/></svg><span class="nav-label-full">Internship</span><span class="nav-label-short" aria-hidden="true">Intern.</span></button></div>
+              <div class="reader-node" data-page="contact"><button class="reader-button" type="button" aria-label="Contact"><svg class="nav-icon" aria-hidden="true"><use href="#i-contact"/></svg><span>Contact</span></button></div>
+            </nav>
+          </div>
+        </div>
+        <div class="reader-dial-index" aria-hidden="true"><strong>01</strong></div>
+        <div class="reader-content">
+      <section class="content-view" data-view="experience" aria-labelledby="experience-title" hidden>
+        <div class="content-shell">
+          <button class="back-button" type="button" data-go-home><span class="back-icon" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>Back to Home</button>
+          <div class="page-heading"><h2 id="experience-title" tabindex="-1">Experience<span class="heading-dot">.</span></h2></div>
+          <div class="timeline"><article><span class="timeline-date">2026.09</span><div><span class="eyebrow">OPEN SOURCE</span><h3>LoopX contributor</h3><p>Worked on encoding regression coverage and Node 26 compatibility tests in a long-running AI Agent control platform.</p><div class="inline-links"><a href="https://github.com/huangruiteng/loopx/pull/4158" target="_blank" rel="noopener noreferrer">PR #4158 ↗</a><a href="https://github.com/huangruiteng/loopx/pull/4168" target="_blank" rel="noopener noreferrer">PR #4168 ↗</a></div></div></article><article><span class="timeline-date">PERSONAL WORK</span><div><span class="eyebrow">APPLICATIONS</span><h3>NutriGo &amp; AniGo</h3><p>Built an AI nutrition application and an RSS automation tool, working across Go backends, AI services and testing.</p><div class="inline-links"><a href="https://github.com/Green-hats/NutriGo" target="_blank" rel="noopener noreferrer">NutriGo ↗</a><a href="https://github.com/Green-hats/AniGo" target="_blank" rel="noopener noreferrer">AniGo ↗</a></div></div></article><article><span class="timeline-date">2024 — 2028</span><div><span class="eyebrow">EDUCATION</span><h3>Software Engineering</h3><p>Undergraduate at Hebei University of Science and Technology. Graduation expected in June 2028.</p></div></article></div>
+        </div>
+      </section>
+
       <section class="content-view" data-view="skills" aria-labelledby="skills-title" hidden>
-        <div class="content-shell"><button class="back-button" type="button" data-go-home><svg aria-hidden="true"><use href="#i-arrow"/></svg>Back to Home</button><div class="page-heading"><span class="page-index">01 / 07</span><h2 id="skills-title" tabindex="-1">Skills<span class="heading-dot">.</span></h2><p>Areas I’m exploring.</p></div><div class="rule-list"><div><span>01</span><h3>AI / Agents</h3><p>Add tools and an example.</p></div><div><span>02</span><h3>Full-Stack Development</h3><p>Add your stack and a project.</p></div><div><span>03</span><h3>Animation</h3><p>Add related interests or work.</p></div></div></div>
+        <div class="content-shell">
+          <button class="back-button" type="button" data-go-home><span class="back-icon" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>Back to Home</button>
+          <div class="page-heading"><h2 id="skills-title" tabindex="-1">Skills<span class="heading-dot">.</span></h2></div>
+          <div class="skill-list">
+            <article class="detail-row"><span class="row-number">01</span><div><h3>AI &amp; agents</h3><p>Agent loops, tool calling, RAG and vector search. Built five nutrition tools with LiteLLM, BGE-small-zh and ChromaDB in <a href="https://github.com/Green-hats/NutriGo" target="_blank" rel="noopener noreferrer">NutriGo<span class="external-mark" aria-hidden="true">↗</span></a>.</p><div class="tag-line"><span>Python</span><span>FastAPI</span><span>LiteLLM</span><span>ChromaDB</span></div></div></article>
+            <article class="detail-row"><span class="row-number">02</span><div><h3>Backend systems</h3><p>REST APIs, persistence, JWT authentication and service integration across Go and Python services.</p><div class="tag-line"><span>Go</span><span>Gin</span><span>GORM</span><span>SQLite</span></div></div></article>
+            <article class="detail-row"><span class="row-number">03</span><div><h3>Automation &amp; delivery</h3><p>RSS workflows, LLM-assisted parsing and rule-based selection in <a href="https://github.com/Green-hats/AniGo" target="_blank" rel="noopener noreferrer">AniGo<span class="external-mark" aria-hidden="true">↗</span></a>. Work with Docker Compose, GitHub Actions, pytest and Go test.</p><div class="tag-line"><span>RSS</span><span>Docker Compose</span><span>Testing</span></div></div></article>
+          </div>
+        </div>
       </section>
 
       <section class="content-view" data-view="gallery" aria-labelledby="gallery-title" hidden>
-        <div class="content-shell"><button class="back-button" type="button" data-go-home><svg aria-hidden="true"><use href="#i-arrow"/></svg>Back to Home</button><div class="page-heading"><span class="page-index">02 / 07</span><h2 id="gallery-title" tabindex="-1">Gallery<span class="heading-dot">.</span></h2><p>Images and projects to add.</p></div><div class="gallery-grid"><div class="gallery-placeholder"><span>01</span><p>Add an image or project</p></div><div class="gallery-placeholder"><span>02</span><p>Add an image or project</p></div><div class="gallery-placeholder"><span>03</span><p>Add an image or project</p></div></div></div>
-      </section>
-
-      <section class="content-view" data-view="internship" aria-labelledby="internship-title" hidden>
-        <div class="content-shell"><button class="back-button" type="button" data-go-home><svg aria-hidden="true"><use href="#i-arrow"/></svg>Back to Home</button><div class="page-heading"><span class="page-index">03 / 07</span><h2 id="internship-title" tabindex="-1">Internship<span class="heading-dot">.</span></h2><p>Git Faced</p></div><div class="feature-line"><span class="feature-marker" aria-hidden="true"></span><div><h3>Internship details</h3><p>Role, dates, and selected work will be added here.</p></div></div></div>
-      </section>
-
-      <section class="content-view" data-view="contact" aria-labelledby="contact-title" hidden>
-        <div class="content-shell"><button class="back-button" type="button" data-go-home><svg aria-hidden="true"><use href="#i-arrow"/></svg>Back to Home</button><div class="page-heading"><span class="page-index">04 / 07</span><h2 id="contact-title" tabindex="-1">Contact<span class="heading-dot">.</span></h2><p>Ways to connect will appear here.</p></div><div class="contact-lines"><div><span>Email</span><p>Add your preferred email address</p></div><div><span>Social</span><p>Add a profile link</p></div></div></div>
-      </section>
-
-      <section class="content-view" data-view="travel" aria-labelledby="travel-title" hidden>
-        <div class="content-shell"><button class="back-button" type="button" data-go-home><svg aria-hidden="true"><use href="#i-arrow"/></svg>Back to Home</button><div class="page-heading"><span class="page-index">05 / 07</span><h2 id="travel-title" tabindex="-1">Travel<span class="heading-dot">.</span></h2><p>Places and memories to add.</p></div><div class="empty-landscape"><span>Travel notes and photos can live here.</span></div></div>
-      </section>
-
-      <section class="content-view" data-view="experience" aria-labelledby="experience-title" hidden>
-        <div class="content-shell"><button class="back-button" type="button" data-go-home><svg aria-hidden="true"><use href="#i-arrow"/></svg>Back to Home</button><div class="page-heading"><span class="page-index">06 / 07</span><h2 id="experience-title" tabindex="-1">Experience<span class="heading-dot">.</span></h2><p>Learning, making, and growing.</p></div><div class="rule-list"><div><span>01</span><h3>Projects</h3><p>Add a project and what you contributed.</p></div><div><span>02</span><h3>Other experience</h3><p>Add a verified role or activity.</p></div></div></div>
+        <div class="content-shell">
+          <button class="back-button" type="button" data-go-home><span class="back-icon" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>Back to Home</button>
+          <div class="page-heading"><h2 id="gallery-title" tabindex="-1">Gallery<span class="heading-dot">.</span></h2></div>
+          <div class="project-grid">
+            <article class="project-tile"><div class="project-art project-art-nutri"><img src="assets/nutrigo-chat.jpg" alt="NutriGo AI chat screen" width="390" height="844" decoding="async"></div><div class="project-copy"><span class="project-type">AI APPLICATION</span><h3>NutriGo</h3><p>Food recognition, nutrition analysis and an agent with five tools backed by a 2,277-entry RAG knowledge base.</p><div class="project-facts"><span>5 agent tools</span><span>2,277 RAG entries</span></div><a href="https://github.com/Green-hats/NutriGo" target="_blank" rel="noopener noreferrer">Explore project <span aria-hidden="true">↗</span></a></div></article>
+            <article class="project-tile"><div class="project-art project-art-anigo"><img src="assets/anigo-home.png" alt="AniGo subscription dashboard" width="4320" height="2700" decoding="async"></div><div class="project-copy"><span class="project-type">AUTOMATION</span><h3>AniGo</h3><p>An RSS workflow that uses an LLM to parse release details, then applies rules to choose a version and coordinate cloud tasks.</p><div class="project-facts"><span>RSS</span><span>LLM parsing</span><span>Rule selection</span></div><a href="https://github.com/Green-hats/AniGo" target="_blank" rel="noopener noreferrer">Explore project <span aria-hidden="true">↗</span></a></div></article>
+          </div>
+        </div>
       </section>
 
       <section class="content-view" data-view="achievements" aria-labelledby="achievements-title" hidden>
-        <div class="content-shell"><button class="back-button" type="button" data-go-home><svg aria-hidden="true"><use href="#i-arrow"/></svg>Back to Home</button><div class="page-heading"><span class="page-index">07 / 07</span><h2 id="achievements-title" tabindex="-1">Achievements<span class="heading-dot">.</span></h2><p>Milestones to add.</p></div><div class="feature-line"><span class="feature-marker" aria-hidden="true"></span><div><h3>Nothing listed yet</h3><p>Add verified awards, milestones, or recognitions here.</p></div></div></div>
+        <div class="content-shell">
+          <button class="back-button" type="button" data-go-home><span class="back-icon" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>Back to Home</button>
+          <div class="page-heading"><h2 id="achievements-title" tabindex="-1">Achievements<span class="heading-dot">.</span></h2></div>
+          <div class="award-list"><article><span class="award-number">01</span><div><span class="eyebrow">PROGRAMMING</span><h3>Lanqiao Cup</h3><p>National Software and Information Technology Professionals Competition · Software Competition, Python category</p></div><strong>National Finals<br>Third Prize</strong></article><article><span class="award-number">02</span><div><span class="eyebrow">MATHEMATICAL MODELING</span><h3>MCM / ICM</h3><p>Mathematical Contest in Modeling / Interdisciplinary Contest in Modeling</p></div><strong>S Award</strong></article></div>
+        </div>
       </section>
+
+      <section class="content-view" data-view="travel" aria-labelledby="travel-title" hidden>
+        <div class="content-shell">
+          <button class="back-button" type="button" data-go-home><span class="back-icon" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>Back to Home</button>
+          <div class="page-heading"><h2 id="travel-title" tabindex="-1">Travel<span class="heading-dot">.</span></h2></div>
+          <div class="travel-empty"><div class="travel-visual" aria-hidden="true"><span class="travel-path"></span><span class="travel-line"></span><svg><use href="#i-travel"/></svg></div><div class="travel-copy"><span class="eyebrow">NO ENTRIES YET</span><h3>More to come.</h3></div></div>
+        </div>
+      </section>
+
+      <section class="content-view" data-view="internship" aria-labelledby="internship-title" hidden>
+        <div class="content-shell">
+          <button class="back-button" type="button" data-go-home><span class="back-icon" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>Back to Home</button>
+          <div class="page-heading"><h2 id="internship-title" tabindex="-1">Internship<span class="heading-dot">.</span></h2></div>
+          <div class="internship-focus"><p>I’m looking for opportunities in</p><h3>AI Agent <span>/</span><br>AI Full-Stack Development</h3><a href="mailto:greenhats666@gmail.com">Get in touch <span aria-hidden="true">↗</span></a></div>
+        </div>
+      </section>
+
+      <section class="content-view" data-view="contact" aria-labelledby="contact-title" hidden>
+        <div class="content-shell">
+          <button class="back-button" type="button" data-go-home><span class="back-icon" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>Back to Home</button>
+          <div class="page-heading"><h2 id="contact-title" tabindex="-1">Contact<span class="heading-dot">.</span></h2></div>
+          <address class="contact-display"><div class="contact-primary"><span class="eyebrow">EMAIL</span><a href="mailto:greenhats666@gmail.com">greenhats666@gmail.com <span aria-hidden="true">↗</span></a></div><div class="contact-secondary"><span class="eyebrow">FIND MY WORK</span><a href="https://github.com/Green-hats" target="_blank" rel="noopener noreferrer">GitHub / Green-hats <span aria-hidden="true">↗</span></a></div></address>
+        </div>
+      </section>
+        </div>
+        <div class="reader-controls" aria-label="Section controls"><button type="button" data-step="-1" aria-label="Previous section">↑</button><span class="reader-count" aria-live="polite">01 / 07</span><button type="button" data-step="1" aria-label="Next section">↓</button></div>
+      </div>
     </main>
 
-    <footer class="site-footer"><span>© 2026 XXX</span></footer>
   </div>
 </body>
 </html>
