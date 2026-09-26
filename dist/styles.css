@@ -7,9 +7,9 @@
 @font-face{font-family:'Orbit WenKai';src:url('assets/fonts/orbit-wenkai-medium.woff2') format('woff2');font-style:normal;font-weight:500 700;font-display:swap}
 :root{color-scheme:light;--paper:#ffffff;--cream:#f8f8f5;--accent:#ffe09e;--accent-line:#dbaa5b;--ink:#29343a;--muted:#5e6a70;--line:#e7e8e5;--font-title:'Poppins',Arial,sans-serif;--font-body:'Inter',Arial,sans-serif}
 html[lang="zh-CN"]{--font-title:'Poppins','Orbit WenKai','Songti SC','Noto Serif SC',serif;--font-body:'Inter','Orbit WenKai','Songti SC','Noto Serif SC',serif;--font-zh-display:'Poppins','Songti SC','Noto Serif SC','Orbit WenKai',serif}
-html.locale-leaving .site-frame{opacity:0;transform:translateY(-7px) scale(.995);transition:opacity .2s ease,transform .2s ease}
-html.locale-arriving .site-frame{animation:locale-enter .38s cubic-bezier(.22,1,.36,1) both}
-@keyframes locale-enter{from{opacity:0;transform:translateY(9px) scale(.995)}to{opacity:1;transform:translateY(0) scale(1)}}
+html.locale-leaving main{opacity:.45;transition:opacity .13s ease-in}
+html.locale-arriving main{animation:locale-enter .2s ease-out both}
+@keyframes locale-enter{from{opacity:.45}to{opacity:1}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:16px;-webkit-font-smoothing:antialiased}
@@ -597,4 +597,4 @@ html.theme-changing body,html.theme-changing .centerpiece:before,html.theme-chan
 @media(max-width:700px){html[data-theme="dark"] .reader-content:after{background:linear-gradient(transparent,var(--paper))}html[data-theme="dark"] .reader-controls{background:var(--paper)}}
 @media(hover:none),(max-width:540px){html[data-theme="dark"] .orbit-button span{border:0;background:none}}
 @media(max-width:360px){.brand{font-size:19px}.brand-orbit{width:25px;height:25px}.language-switch a{min-width:32px;padding:0 4px}.theme-trigger{width:34px;height:34px}}
-@media(prefers-reduced-motion:reduce){html.locale-arriving .site-frame{animation:none}html.locale-leaving .site-frame{transition:none}html.theme-changing body,html.theme-changing .centerpiece:before,html.theme-changing .orbit-button,html.theme-changing .reader-button,html.theme-changing .reader-disc,html.theme-changing .theme-menu,html.theme-changing .theme-trigger,html.theme-changing .language-switch,html.theme-changing .back-icon,html.theme-changing .tag-line span,html.theme-changing .project-art,html.theme-changing .tech-atlas,html.theme-changing .travel-visual{transition:none}}
+@media(prefers-reduced-motion:reduce){html.locale-arriving main{animation:none}html.locale-leaving main{opacity:1;transition:none}html.theme-changing body,html.theme-changing .centerpiece:before,html.theme-changing .orbit-button,html.theme-changing .reader-button,html.theme-changing .reader-disc,html.theme-changing .theme-menu,html.theme-changing .theme-trigger,html.theme-changing .language-switch,html.theme-changing .back-icon,html.theme-changing .tag-line span,html.theme-changing .project-art,html.theme-changing .tech-atlas,html.theme-changing .travel-visual{transition:none}}

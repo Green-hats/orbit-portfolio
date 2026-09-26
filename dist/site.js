@@ -15,6 +15,7 @@ const wheelResistance = .7;
 const orbitHintKey = "greenhats-orbit-hint-seen";
 const themeKey = "greenhats-theme";
 const languageTransitionKey = "greenhats-language-transition";
+const languageScrollKey = "greenhats-language-scroll";
 const currentLocale = document.documentElement.lang === "zh-CN" ? "zh" : "en";
 const sectionLabels = {
   experience: "经历", skills: "技能", gallery: "项目", achievements: "荣誉",
@@ -356,9 +357,14 @@ document.querySelectorAll("[data-language]").forEach(link => link.addEventListen
   if (link.dataset.language === currentLocale) { event.preventDefault(); return; }
   event.preventDefault();
   updateLanguageLinks();
-  try { sessionStorage.setItem(languageTransitionKey, "1"); } catch (_) { /* Navigation still works. */ }
+  try {
+    const activePage = pages.get(current);
+    const scrollRange = activePage.scrollHeight - activePage.clientHeight;
+    sessionStorage.setItem(languageScrollKey, JSON.stringify({ page: current, progress: scrollRange > 0 ? activePage.scrollTop / scrollRange : 0 }));
+    sessionStorage.setItem(languageTransitionKey, "1");
+  } catch (_) { /* Navigation still works. */ }
   document.documentElement.classList.add("locale-leaving");
-  window.setTimeout(() => window.location.assign(link.href), reducedMotion.matches ? 0 : 210);
+  window.setTimeout(() => window.location.assign(link.href), reducedMotion.matches ? 0 : 130);
 }));
 themeTrigger.addEventListener("click", () => {
   const open = themeMenu.hidden;
@@ -422,6 +428,17 @@ document.addEventListener("keydown", event => {
 });
 
 setTheme(themeMode);
-if (document.documentElement.classList.contains("locale-arriving")) home.classList.add("has-told-intro");
+const switchedLanguage = document.documentElement.classList.contains("locale-arriving");
+if (switchedLanguage) home.classList.add("has-told-intro");
 showInitial(pageFromUrl());
+if (switchedLanguage) {
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(languageScrollKey) || "null");
+    sessionStorage.removeItem(languageScrollKey);
+    if (current !== "home" && saved?.page === current) {
+      const activePage = pages.get(current);
+      activePage.scrollTop = Math.max(0, Math.min(1, saved.progress)) * (activePage.scrollHeight - activePage.clientHeight);
+    }
+  } catch (_) { /* The new chapter still opens at its start. */ }
+}
 if (current === "home") queueOrbitHint();
