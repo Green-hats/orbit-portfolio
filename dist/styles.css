@@ -85,7 +85,7 @@ html[lang="zh-CN"] .intro h1{font-size:min(31px,4.35cqw);letter-spacing:-.055em}
 .home-view:not(.is-leaving):has(.orbit-button:is(:hover,:focus-visible)) .intro-swish{border-color:#c48f3d}
 .orbit-nav{position:absolute;inset:0;transition:opacity .28s ease,transform .28s ease}
 .orbit-button{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;width:var(--node-size);aspect-ratio:1;border:1px solid #e8c783;border-radius:50%;background:#fefdfb;color:var(--ink);font-family:var(--font-title);font-size:12px;font-weight:500;line-height:1.2;box-shadow:0 7px 18px rgba(90,73,43,.07);cursor:pointer;transform:translate(-50%,-50%);transition:background .22s ease,border-color .22s ease,box-shadow .22s ease,transform .22s ease,opacity .17s ease;white-space:nowrap}
-.home-view .orbit-button{animation:satellite-sway var(--sway-duration,5.2s) ease-in-out var(--sway-delay,0s) infinite;will-change:translate,rotate}
+.home-view .orbit-button{animation:satellite-sway var(--sway-duration,5.2s) ease-in-out var(--sway-delay,0s) infinite;will-change:translate}
 .orbit-button:nth-child(1){--sway-duration:5.2s;--sway-delay:-.8s}
 .orbit-button:nth-child(2){--sway-duration:4.7s;--sway-delay:-2.1s}
 .orbit-button:nth-child(3){--sway-duration:5.6s;--sway-delay:-3.9s}
@@ -93,7 +93,7 @@ html[lang="zh-CN"] .intro h1{font-size:min(31px,4.35cqw);letter-spacing:-.055em}
 .orbit-button:nth-child(5){--sway-duration:5.8s;--sway-delay:-4.6s}
 .orbit-button:nth-child(6){--sway-duration:5.1s;--sway-delay:-3.1s}
 .orbit-button:nth-child(7){--sway-duration:5.5s;--sway-delay:-2.7s}
-@keyframes satellite-sway{0%,100%{translate:0 0;rotate:0deg}23%{translate:0 -2px;rotate:-2.8deg}53%{translate:0 -3px;rotate:3.2deg}78%{translate:0 1px;rotate:-1.2deg}}
+@keyframes satellite-sway{0%,100%{translate:0 0}50%{translate:0 -1.5px}}
 .orbit-button:before{content:"";position:absolute;inset:-7px;border:1px solid rgba(219,170,91,.53);border-radius:50%;opacity:0;transform:scale(.86);transition:opacity .24s ease,transform .24s ease;pointer-events:none}
 .orbit-button span{position:absolute;top:calc(100% + 9px);left:50%;padding:5px 9px;border:1px solid #e8d4ae;border-radius:999px;background:var(--paper);box-shadow:0 5px 15px rgba(90,73,43,.07);opacity:0;pointer-events:none;transform:translate(-50%,-5px);transition:opacity .18s ease,transform .18s ease}
 .orbit-button:focus-visible:before,.orbit-button.is-selected:before{opacity:.7;transform:scale(1)}
