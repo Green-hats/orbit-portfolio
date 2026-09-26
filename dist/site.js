@@ -4,6 +4,7 @@ const home = pages.get("home");
 const reader = document.querySelector("[data-reader]");
 const ring = reader.querySelector(".reader-orbit");
 const homeButtons = [...document.querySelectorAll(".orbit-button")];
+const orbitHintButton = homeButtons.find(button => button.dataset.page === "skills");
 const readerNodes = [...reader.querySelectorAll(".reader-node")];
 const readerCount = reader.querySelector(".reader-count");
 const dialIndex = reader.querySelector(".reader-dial-index strong");
@@ -12,6 +13,7 @@ const stepAngle = 360 / sectionNames.length;
 const wheelThreshold = 280;
 const wheelResistance = .7;
 const languageKey = "greenhats-portfolio-language";
+const orbitHintKey = "greenhats-orbit-hint-seen";
 const sectionLabels = {
   experience: "经历", skills: "技能", gallery: "项目", achievements: "荣誉",
   travel: "旅行", internship: "求职", contact: "联系"
@@ -149,6 +151,33 @@ let pendingNavigation = null;
 let wheelAmount = 0;
 let wheelLockedUntil = 0;
 let wheelReleaseTimer = 0;
+let orbitHintStartTimer = 0;
+let orbitHintEndTimer = 0;
+let orbitHintPlayed = false;
+try { orbitHintPlayed = sessionStorage.getItem(orbitHintKey) === "1"; } catch (_) { /* Keep the hint for this visit. */ }
+
+function dismissOrbitHint(markSeen = true) {
+  window.clearTimeout(orbitHintStartTimer);
+  window.clearTimeout(orbitHintEndTimer);
+  orbitHintButton.classList.remove("is-intro-hint");
+  if (!markSeen) return;
+  orbitHintPlayed = true;
+  try { sessionStorage.setItem(orbitHintKey, "1"); } catch (_) { /* In-memory state still prevents a replay. */ }
+}
+
+function canShowOrbitHint() {
+  return !document.hidden && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+}
+
+function queueOrbitHint() {
+  if (orbitHintPlayed || !canShowOrbitHint()) return;
+  window.clearTimeout(orbitHintStartTimer);
+  orbitHintStartTimer = window.setTimeout(() => {
+    if (current !== "home" || home.hidden || transitioning || !canShowOrbitHint()) return;
+    orbitHintButton.classList.add("is-intro-hint");
+    orbitHintEndTimer = window.setTimeout(() => dismissOrbitHint(), 1900);
+  }, 1450);
+}
 
 function clearWheelPreview(immediate = false) {
   window.clearTimeout(wheelReleaseTimer);
@@ -333,6 +362,7 @@ async function returnHome() {
   current = "home";
   setTitle("home");
   focusPage("home");
+  queueOrbitHint();
 }
 
 async function navigate(name, updateHistory = true) {
@@ -342,6 +372,7 @@ async function navigate(name, updateHistory = true) {
     return;
   }
   if (name === current) return;
+  if (current === "home") dismissOrbitHint();
   transitioning = true;
   clearWheelPreview(true);
   if (updateHistory) {
@@ -385,7 +416,15 @@ reader.querySelectorAll(".reader-disc i").forEach((tick, index) => {
   tick.style.left = `${50 + 48.7 * Math.cos(angle)}%`;
   tick.style.top = `${50 + 48.7 * Math.sin(angle)}%`;
 });
-homeButtons.forEach(button => button.addEventListener("click", () => navigate(button.dataset.page)));
+homeButtons.forEach(button => {
+  button.addEventListener("pointerenter", () => { if (current === "home") dismissOrbitHint(); });
+  button.addEventListener("click", () => navigate(button.dataset.page));
+});
+document.addEventListener("pointerdown", () => { if (current === "home") dismissOrbitHint(); }, { passive: true });
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) dismissOrbitHint(false);
+  else if (current === "home") queueOrbitHint();
+});
 document.querySelectorAll("[data-go-home]").forEach(button => button.addEventListener("click", () => navigate("home")));
 document.querySelectorAll("[data-language]").forEach(button => button.addEventListener("click", () => {
   if (button.dataset.language !== currentLocale) applyLocale(button.dataset.language, true);
@@ -428,7 +467,7 @@ window.addEventListener("wheel", event => {
 }, { passive: false });
 
 document.addEventListener("keydown", event => {
-  if (current === "home") return;
+  if (current === "home") { dismissOrbitHint(); return; }
   if (event.key === "Escape") { event.preventDefault(); navigate("home"); }
   if (["ArrowDown", "PageDown"].includes(event.key)) { event.preventDefault(); stepSection(1); }
   if (["ArrowUp", "PageUp"].includes(event.key)) { event.preventDefault(); stepSection(-1); }
@@ -436,3 +475,4 @@ document.addEventListener("keydown", event => {
 
 applyLocale(currentLocale);
 showInitial(pageFromUrl());
+if (current === "home") queueOrbitHint();

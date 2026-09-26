@@ -81,8 +81,8 @@ html[lang="zh-CN"] .intro h1{font-size:min(31px,4.35cqw);letter-spacing:-.055em}
 .home-view.has-told-intro .intro-title-text{clip-path:none;animation:none}
 .home-view.has-told-intro .intro-title-caret{display:none}
 .home-view.has-told-intro .intro-swish,.home-view.has-told-intro .intro-line{opacity:1;scale:1;transform:none;animation:none}
-.home-view:not(.is-leaving):has(.orbit-button:is(:hover,:focus-visible)) .centerpiece:before{border-color:#e7c78d;box-shadow:0 0 0 9px rgba(255,224,158,.22),0 12px 30px rgba(90,73,43,.06)}
-.home-view:not(.is-leaving):has(.orbit-button:is(:hover,:focus-visible)) .intro-swish{border-color:#c48f3d}
+.home-view:not(.is-leaving):has(.orbit-button:is(:hover,:focus-visible,.is-intro-hint)) .centerpiece:before{border-color:#e7c78d;box-shadow:0 0 0 9px rgba(255,224,158,.22),0 12px 30px rgba(90,73,43,.06)}
+.home-view:not(.is-leaving):has(.orbit-button:is(:hover,:focus-visible,.is-intro-hint)) .intro-swish{border-color:#c48f3d}
 .orbit-nav{position:absolute;inset:0;transition:opacity .28s ease,transform .28s ease}
 .orbit-button{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;width:var(--node-size);aspect-ratio:1;border:1px solid #e8c783;border-radius:50%;background:#fefdfb;color:var(--ink);font-family:var(--font-title);font-size:12px;font-weight:500;line-height:1.2;box-shadow:0 7px 18px rgba(90,73,43,.07);cursor:pointer;transform:translate(-50%,-50%);transition:background .22s ease,border-color .22s ease,box-shadow .22s ease,transform .22s ease,opacity .17s ease;white-space:nowrap}
 .home-view .orbit-button{animation:satellite-sway var(--sway-duration,5.2s) ease-in-out var(--sway-delay,0s) infinite;will-change:transform,translate,rotate;backface-visibility:hidden;transform:translate3d(-50%,-50%,0)}
@@ -97,9 +97,9 @@ html[lang="zh-CN"] .intro h1{font-size:min(31px,4.35cqw);letter-spacing:-.055em}
 @keyframes satellite-sway{0%,100%{translate:0 0;rotate:-2deg}50%{translate:0 -3px;rotate:2deg}}
 .orbit-button:before{content:"";position:absolute;inset:-7px;border:1px solid rgba(219,170,91,.53);border-radius:50%;opacity:0;transform:scale(.86);transition:opacity .24s ease,transform .24s ease;pointer-events:none}
 .orbit-button span{position:absolute;top:calc(100% + 9px);left:50%;padding:5px 9px;border:1px solid #e8d4ae;border-radius:999px;background:var(--paper);box-shadow:0 5px 15px rgba(90,73,43,.07);opacity:0;pointer-events:none;transform:translate(-50%,-5px);transition:opacity .18s ease,transform .18s ease}
-.orbit-button:focus-visible:before,.orbit-button.is-selected:before{opacity:.7;transform:scale(1)}
-.orbit-button:focus-visible span,.orbit-button.is-selected span{opacity:1;transform:translate(-50%,0)}
-.orbit-button:focus-visible{background:#fff5de;border-color:#d6a554;box-shadow:0 11px 24px rgba(90,73,43,.12);transform:translate(-50%,-54%) scale(1.035)}
+.orbit-button:focus-visible:before,.orbit-button.is-intro-hint:before,.orbit-button.is-selected:before{opacity:.7;transform:scale(1)}
+.orbit-button:focus-visible span,.orbit-button.is-intro-hint span,.orbit-button.is-selected span{opacity:1;transform:translate(-50%,0)}
+.orbit-button:focus-visible,.orbit-button.is-intro-hint{background:#fff5de;border-color:#d6a554;box-shadow:0 11px 24px rgba(90,73,43,.12);transform:translate(-50%,-54%) scale(1.035)}
 @media(hover:hover){.orbit-button:hover{background:#fff5de;border-color:#d6a554;box-shadow:0 11px 24px rgba(90,73,43,.12);transform:translate(-50%,-54%) scale(1.035)}.orbit-button:hover:before{opacity:.7;transform:scale(1)}.orbit-button:hover span{opacity:1;transform:translate(-50%,0)}}
 .orbit-button:active,.orbit-button.is-selected{background:var(--accent);border-color:#d6a554;box-shadow:0 7px 19px rgba(90,73,43,.15);transform:translate(-50%,-50%) scale(.97)}
 .nav-icon{width:50%;height:50%;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
@@ -110,7 +110,7 @@ html[lang="zh-CN"] .intro h1{font-size:min(31px,4.35cqw);letter-spacing:-.055em}
 .orbit-button[data-page="travel"]{left:31.322%;top:88.793%}
 .orbit-button[data-page="internship"]{left:8.024%;top:59.583%}
 .orbit-button[data-page="contact"]{left:16.337%;top:23.156%}
-.home-view .orbit-button:focus-visible{animation-play-state:paused}
+.home-view .orbit-button:focus-visible,.home-view .orbit-button.is-intro-hint{animation-play-state:paused}
 .home-view .orbit-button:active,.home-view .orbit-button.is-selected{animation-play-state:paused}
 .home-view .orbit-button.is-flight-target,.home-view .orbit-button.is-landing{animation:none;translate:0 0;rotate:0deg}
 @media(hover:hover){.home-view .orbit-button:hover{animation-play-state:paused}}
