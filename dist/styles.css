@@ -407,7 +407,7 @@ main{display:grid;position:relative}
 [data-view="skills"] .detail-row p{margin-top:15px;line-height:1.6}
 [data-view="skills"] .tag-line{margin-top:auto;padding-top:26px}
 .tech-stack-title{margin:30px 0 17px;font:600 clamp(23px,2.2vw,29px)/1.2 var(--font-title);letter-spacing:-.045em}
-.tech-atlas{position:relative;isolation:isolate;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;gap:12px 8px;min-height:315px;padding:33px 24px 22px;overflow:hidden;border:1px solid #e9d9bc;border-radius:20px;background:radial-gradient(circle at 51% 58%,#fffdf8 0,#faf7ef 68%,#f8f3e9 100%)}
+.tech-atlas{position:relative;isolation:isolate;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:center;gap:12px 8px;min-height:315px;padding:33px 24px 22px;overflow:hidden;border:1px solid #e9d9bc;border-radius:20px;background:radial-gradient(circle at 51% 58%,#fffdf8 0,#faf7ef 68%,#f8f3e9 100%)}
 .tech-atlas:before{content:"";position:absolute;z-index:0;top:-58%;left:-14%;width:130%;height:215%;border:1px solid rgba(211,180,128,.38);border-radius:50%;transform:rotate(-11deg);pointer-events:none}
 .tech-atlas:after{content:"";position:absolute;z-index:0;inset:0;background:radial-gradient(circle at 7% 26%,#d9ae66 0 2px,transparent 3px),radial-gradient(circle at 31% 79%,#d9ae66 0 2px,transparent 3px),radial-gradient(circle at 64% 22%,#d9ae66 0 2px,transparent 3px),radial-gradient(circle at 91% 72%,#d9ae66 0 2px,transparent 3px);opacity:.62;pointer-events:none}
 .tech-mark{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-width:0;text-align:center;transform:translateY(var(--shift,0px)) rotate(var(--tilt,0deg))}
@@ -421,8 +421,6 @@ main{display:grid;position:relative}
 .tech-mark:nth-child(6){--shift:10px;--tilt:4deg;--logo-size:74px}
 .tech-mark:nth-child(7){--shift:-11px;--tilt:-5deg;--logo-size:68px}
 .tech-mark:nth-child(8){--shift:12px;--tilt:5deg;--logo-size:72px}
-.tech-mark:nth-child(9){--shift:-14px;--tilt:-4deg;--logo-size:70px}
-.tech-mark:nth-child(10){--shift:10px;--tilt:4deg;--logo-size:72px}
 
 [data-view="experience"] .timeline{margin-top:24px}
 [data-view="experience"] .timeline article{padding:34px 0 36px}
@@ -497,7 +495,7 @@ main{display:grid;position:relative}
   [data-view="skills"] .detail-row>div{display:block}
   [data-view="skills"] .detail-row p{margin-top:12px}
   [data-view="skills"] .tag-line{padding-top:14px}
-  .tech-atlas{grid-template-columns:repeat(3,minmax(0,1fr));gap:25px 10px;min-height:0;padding:35px 16px}
+  .tech-atlas{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 10px;min-height:0;padding:35px 16px}
   .tech-mark{transform:none}
   .tech-mark img{width:52px;height:52px}
   [data-view="experience"] .timeline article{padding:23px 0}
@@ -516,7 +514,7 @@ main{display:grid;position:relative}
   .internship-focus h3{font-size:clamp(31px,8.5vw,40px)}
   .internship-focus>a{margin-top:26px}
 }
-@media(max-width:420px){.tech-atlas{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 8px}}
+@media(max-width:420px){.tech-atlas{gap:25px 8px}}
 @media(max-width:360px){.contact-primary a{font-size:19px;letter-spacing:-.06em}}
 
 /* Chinese uses a quiet editorial display face alongside a clear sans body. */

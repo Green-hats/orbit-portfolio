@@ -43,7 +43,7 @@ const copyDefinitions = [
   ["[data-view='skills'] .detail-row:nth-child(2) h3", "后端系统"],
   ["[data-view='skills'] .detail-row:nth-child(2) p", "使用 Go 与 Python 开发 REST API、数据持久化、JWT 认证及服务集成。"],
   ["[data-view='skills'] .detail-row:nth-child(3) h3", "自动化与交付"],
-  ["[data-view='skills'] .detail-row:nth-child(3) p", "在 <a href='https://github.com/Green-hats/AniGo' target='_blank' rel='noopener noreferrer'>AniGo<span class='external-mark' aria-hidden='true'>↗</span></a> 中实现 RSS 工作流、LLM 辅助解析与规则筛选；使用 Docker Compose、GitHub Actions、pytest 和 Go test。", "html"],
+  ["[data-view='skills'] .detail-row:nth-child(3) p", "在 <a href='https://github.com/Green-hats/AniGo' target='_blank' rel='noopener noreferrer'>AniGo<span class='external-mark' aria-hidden='true'>↗</span></a> 中实现 RSS 工作流、LLM 辅助解析与规则筛选；使用 Docker Compose、pytest 和 Go test。", "html"],
   ["[data-view='skills'] .detail-row:nth-child(3) .tag-line span:last-child", "测试"],
 
   ["[data-view='gallery'] .page-heading h2", "项目", "firstText"],
