@@ -146,6 +146,17 @@ for name, label in labels.items():
         button.set("aria-label", label)
 
 page.set("lang", "zh-CN")
+head = nodes("head")[0]
+first_script = head.xpath("./script")[0]
+for weight in ("regular", "medium"):
+    preload = html.Element("link")
+    preload.set("rel", "preload")
+    preload.set("href", f"assets/fonts/orbit-wenkai-{weight}.woff2")
+    preload.set("as", "font")
+    preload.set("type", "font/woff2")
+    preload.set("crossorigin", "")
+    preload.tail = "\n  "
+    head.insert(head.index(first_script), preload)
 nodes("meta[name='description']")[0].set("content", "Greenhats 的个人作品集：软件工程学生、AI 全栈与 Agent 开发者、动画爱好者。")
 nodes("title")[0].text = "Greenhats · 我的作品集"
 nodes(".brand")[0].set("aria-label", "Greenhats，返回首页")

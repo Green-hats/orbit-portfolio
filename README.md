@@ -16,8 +16,9 @@ peach-orbit-portfolio/
 │       ├── fonts/        字体及对应许可证
 │       ├── tech/         技术栈图标及许可证
 │       └── favicon.svg
-├── originals/            保留原始角色图与项目截图，不参与部署
+├── originals/            保留原始图片与较完整的拉丁字体，不参与部署
 ├── scripts/build_zh.py   从 index.html 生成 zh.html
+├── scripts/optimize_fonts.py  按当前网页用字生成精简的拉丁字体
 ├── docs/交付说明.md       交付包的详细说明与内容来源
 ├── requirements.txt      中文页面生成脚本的依赖
 └── .openai/hosting.json  旧的 Sites 配置；当前线上使用独立服务器
@@ -38,6 +39,13 @@ python3 -m http.server 8766 --directory dist
 ```bash
 python3 -m pip install -r requirements.txt
 python3 scripts/build_zh.py
+```
+
+如修改了英文或中文文案，需重新生成拉丁字体字符集：
+
+```bash
+python3 -m pip install 'fonttools[woff]>=4.50,<5'
+python3 scripts/optimize_fonts.py
 ```
 
 部署时只需复制 `dist/` 内的文件。`originals/` 中的高清原图用于留存和重新导出，不应让浏览器下载。静态图片的引用均指向 `dist/assets/images/`。

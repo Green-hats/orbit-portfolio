@@ -1,8 +1,8 @@
-@font-face{font-family:Poppins;src:url('assets/fonts/poppins-400-latin.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
-@font-face{font-family:Poppins;src:url('assets/fonts/poppins-500-latin.woff2') format('woff2');font-style:normal;font-weight:500;font-display:swap}
-@font-face{font-family:Poppins;src:url('assets/fonts/poppins-600-latin.woff2') format('woff2');font-style:normal;font-weight:600;font-display:swap}
-@font-face{font-family:Poppins;src:url('assets/fonts/poppins-700-latin.woff2') format('woff2');font-style:normal;font-weight:700;font-display:swap}
-@font-face{font-family:Inter;src:url('assets/fonts/inter-latin.woff2') format('woff2');font-style:normal;font-weight:400 600;font-display:swap}
+@font-face{font-family:Poppins;src:url('assets/fonts/poppins-400-latin.woff2?v=2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:Poppins;src:url('assets/fonts/poppins-500-latin.woff2?v=2') format('woff2');font-style:normal;font-weight:500;font-display:swap}
+@font-face{font-family:Poppins;src:url('assets/fonts/poppins-600-latin.woff2?v=2') format('woff2');font-style:normal;font-weight:600;font-display:swap}
+@font-face{font-family:Poppins;src:url('assets/fonts/poppins-700-latin.woff2?v=2') format('woff2');font-style:normal;font-weight:700;font-display:swap}
+@font-face{font-family:Inter;src:url('assets/fonts/inter-latin.woff2?v=2') format('woff2');font-style:normal;font-weight:400 600;font-display:swap}
 @font-face{font-family:'Orbit WenKai';src:url('assets/fonts/orbit-wenkai-regular.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
 @font-face{font-family:'Orbit WenKai';src:url('assets/fonts/orbit-wenkai-medium.woff2') format('woff2');font-style:normal;font-weight:500 700;font-display:swap}
 :root{color-scheme:light;--paper:#ffffff;--cream:#f8f8f5;--accent:#ffe09e;--accent-line:#dbaa5b;--ink:#29343a;--muted:#5e6a70;--line:#e7e8e5;--font-title:'Poppins',Arial,sans-serif;--font-body:'Inter',Arial,sans-serif}
