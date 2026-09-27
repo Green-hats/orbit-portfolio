@@ -3,6 +3,7 @@ const pages = new Map(["home", ...sectionNames].map(name => [name, document.quer
 const home = pages.get("home");
 const reader = document.querySelector("[data-reader]");
 const ring = reader.querySelector(".reader-orbit");
+const readerContent = reader.querySelector(".reader-content");
 const homeButtons = [...document.querySelectorAll(".orbit-button")];
 const orbitHintButton = homeButtons.find(button => button.dataset.page === "skills");
 const readerNodes = [...reader.querySelectorAll(".reader-node")];
@@ -71,7 +72,10 @@ function updateLanguageLinks() {
 
 let current = "home";
 let orbitStep = 0;
-let transitioning = false;
+const NavigationPhase = Object.freeze({
+  HOME: "home", ENTERING: "entering", READING: "reading", SWITCHING: "switching", LEAVING: "leaving"
+});
+let navigationPhase = NavigationPhase.HOME;
 let pendingNavigation = null;
 let wheelAmount = 0;
 let wheelLockedUntil = 0;
@@ -80,6 +84,10 @@ let orbitHintStartTimer = 0;
 let orbitHintEndTimer = 0;
 let orbitHintPlayed = false;
 try { orbitHintPlayed = sessionStorage.getItem(orbitHintKey) === "1"; } catch (_) { /* Keep the hint for this visit. */ }
+
+function isTransitioning() {
+  return navigationPhase !== NavigationPhase.HOME && navigationPhase !== NavigationPhase.READING;
+}
 
 function dismissOrbitHint(markSeen = true) {
   window.clearTimeout(orbitHintStartTimer);
@@ -98,7 +106,7 @@ function queueOrbitHint() {
   if (orbitHintPlayed || !canShowOrbitHint()) return;
   window.clearTimeout(orbitHintStartTimer);
   orbitHintStartTimer = window.setTimeout(() => {
-    if (current !== "home" || home.hidden || transitioning || !canShowOrbitHint()) return;
+    if (navigationPhase !== NavigationPhase.HOME || home.hidden || !canShowOrbitHint()) return;
     orbitHintButton.classList.add("is-intro-hint");
     orbitHintEndTimer = window.setTimeout(() => dismissOrbitHint(), 1900);
   }, 1450);
@@ -129,8 +137,16 @@ function setTitle(name) {
   }
 }
 
-function delay(ms) {
-  return new Promise(resolve => window.setTimeout(resolve, reducedMotion.matches ? 0 : ms));
+function nextFrame() {
+  // Let the browser paint the staged state before toggling its exit/entry class.
+  return new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+}
+
+function waitForMotion(element) {
+  if (reducedMotion.matches || !element?.getAnimations) return Promise.resolve();
+  // CSS transitions and keyframe animations expose their completion here. A
+  // cancelled animation rejects, so cancellation must not stall navigation.
+  return Promise.allSettled(element.getAnimations().map(animation => animation.finished));
 }
 
 function focusPage(name) {
@@ -217,25 +233,27 @@ async function enterReader(name) {
   const chosen = homeButtons.find(button => button.dataset.page === name);
   const targetNode = readerNodes.find(node => node.dataset.page === name);
   chosen.classList.add("is-selected");
-  await delay(70);
+  await nextFrame();
 
   reader.classList.add("is-preparing", "no-ring-motion");
   setRingStep(sectionNames.indexOf(name));
   reader.hidden = false;
   const next = pages.get(name);
   next.hidden = false;
-  next.classList.add("is-active");
   const targetButton = targetNode.querySelector("button");
   const flight = flyButton(chosen, targetButton);
   chosen.classList.add("is-flight-target");
   targetNode.classList.add("is-flight-target");
   home.classList.add("is-leaving");
-  await delay(110);
+  const homeExit = waitForMotion(home.querySelector(".centerpiece"));
+  await nextFrame();
   reader.classList.remove("is-preparing", "no-ring-motion");
-  await delay(220);
-  home.hidden = true;
+  next.classList.add("is-active");
+  const readerReveal = waitForMotion(readerContent);
   const portal = await flight;
+  await Promise.all([homeExit, readerReveal]);
 
+  home.hidden = true;
   chosen.classList.remove("is-selected", "is-flight-target");
   await settleFlight(portal, targetNode);
   home.classList.remove("is-leaving");
@@ -249,8 +267,9 @@ async function changeSection(name) {
   const previous = pages.get(current);
   const next = pages.get(name);
   setRingStep(nearestStep(sectionNames.indexOf(name)));
+  const ringMotion = waitForMotion(ring);
   previous.classList.add("is-leaving");
-  await delay(220);
+  await waitForMotion(previous);
   previous.hidden = true;
   previous.classList.remove("is-leaving", "is-active");
   next.hidden = false;
@@ -259,7 +278,7 @@ async function changeSection(name) {
   current = name;
   setTitle(name);
   focusPage(name);
-  await delay(510);
+  await Promise.all([ringMotion, waitForMotion(next)]);
   next.classList.remove("is-active");
 }
 
@@ -275,9 +294,12 @@ async function returnHome() {
   const flight = flyButton(sourceButton, targetButton, 570);
   sourceNode.classList.add("is-flight-target");
   reader.classList.add("is-closing");
-  await delay(180);
+  const readerExit = waitForMotion(readerContent);
+  await nextFrame();
   home.classList.remove("is-returning");
+  const homeReveal = waitForMotion(home);
   const portal = await flight;
+  await Promise.all([readerExit, homeReveal]);
   previous.hidden = true;
   previous.classList.remove("is-active", "is-leaving");
   reader.hidden = true;
@@ -292,23 +314,30 @@ async function returnHome() {
 
 async function navigate(name, updateHistory = true) {
   if (!pages.has(name)) return;
-  if (transitioning) {
+  if (isTransitioning()) {
     pendingNavigation = { name, updateHistory };
     return;
   }
   if (name === current) return;
   if (current === "home") dismissOrbitHint();
-  transitioning = true;
+  navigationPhase = current === "home" ? NavigationPhase.ENTERING
+    : name === "home" ? NavigationPhase.LEAVING : NavigationPhase.SWITCHING;
   clearWheelPreview(true);
   if (updateHistory) {
     const url = name === "home" ? window.location.pathname + window.location.search : `#${name}`;
     history.pushState({ page: name }, "", url);
     updateLanguageLinks();
   }
-  if (current === "home") await enterReader(name);
-  else if (name === "home") await returnHome();
-  else await changeSection(name);
-  transitioning = false;
+  try {
+    if (navigationPhase === NavigationPhase.ENTERING) await enterReader(name);
+    else if (navigationPhase === NavigationPhase.LEAVING) await returnHome();
+    else await changeSection(name);
+  } catch (error) {
+    console.error("Portfolio navigation failed; restoring the requested section.", error);
+    showInitial(pageFromUrl());
+  } finally {
+    navigationPhase = current === "home" ? NavigationPhase.HOME : NavigationPhase.READING;
+  }
 
   const pending = pendingNavigation;
   pendingNavigation = null;
@@ -318,16 +347,25 @@ async function navigate(name, updateHistory = true) {
 }
 
 function stepSection(direction) {
-  if (current === "home" || transitioning) return;
+  if (navigationPhase !== NavigationPhase.READING) return;
   const index = sectionNames.indexOf(current);
   navigate(sectionNames[modulo(index + direction, sectionNames.length)]);
 }
 
 function showInitial(name) {
-  pages.forEach((page, key) => { page.hidden = key !== name; });
+  home.classList.remove("is-leaving", "is-returning");
+  reader.classList.remove("is-preparing", "no-ring-motion", "is-closing");
+  homeButtons.forEach(button => button.classList.remove("is-selected", "is-flight-target", "is-landing"));
+  readerNodes.forEach(node => node.classList.remove("is-flight-target", "is-landing"));
+  document.querySelectorAll(".portal-button").forEach(portal => portal.remove());
+  pages.forEach((page, key) => {
+    page.classList.remove("is-active", "is-leaving");
+    page.hidden = key !== name;
+  });
   reader.hidden = name === "home";
   if (name !== "home") setRingStep(sectionNames.indexOf(name));
   current = name;
+  navigationPhase = name === "home" ? NavigationPhase.HOME : NavigationPhase.READING;
   setTitle(name);
   updateLanguageLinks();
 }
@@ -389,7 +427,7 @@ window.addEventListener("hashchange", () => { updateLanguageLinks(); navigate(pa
 
 window.addEventListener("wheel", event => {
   if (reader.hidden) return;
-  if (transitioning) {
+  if (isTransitioning()) {
     event.preventDefault();
     return;
   }
@@ -421,8 +459,9 @@ window.addEventListener("wheel", event => {
 }, { passive: false });
 
 document.addEventListener("keydown", event => {
-  if (current === "home") { dismissOrbitHint(); return; }
+  if (navigationPhase === NavigationPhase.HOME) { dismissOrbitHint(); return; }
   if (event.key === "Escape") { event.preventDefault(); navigate("home"); }
+  if (navigationPhase !== NavigationPhase.READING) return;
   if (["ArrowDown", "PageDown"].includes(event.key)) { event.preventDefault(); stepSection(1); }
   if (["ArrowUp", "PageUp"].includes(event.key)) { event.preventDefault(); stepSection(-1); }
 });
